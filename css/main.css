@@ -1,11 +1,12 @@
 * {
     box-sizing: border-box;
-    margin:0;
-    padding:0;
+    margin: 0;
+    padding: 0;
     font-family: system-ui, sans-serif;
 }
 
-body, html {
+body,
+html {
     height: 100%;
 }
 
@@ -27,7 +28,7 @@ body, html {
     margin-bottom: 1rem;
 }
 
-.sidebar .category{
+.sidebar .category {
     margin-top: 1rem;
     margin-bottom: 0.5rem;
     font-weight: bold;
@@ -52,9 +53,54 @@ body, html {
     transition: background 0.15s ease;
 }
 
-.main-view{
+.sidebar a.tool-link.active {
+    background-color: #5b5bd6;
+}
+
+.main-view {
     flex: 1;
     padding: 2rem;
     background-color: #f6f6f8;
     overflow-y: auto;
+}
+
+textarea {
+    width: 100%;
+    min-height: 150px;
+    margin-top: 1rem;
+    padding: 0.75rem;
+    font-family: monospace;
+    resize: vertical;
+    border-radius: 8px;
+    border: 1px solid #444;
+    background-color: #1e1e2a;
+    color: #fff;
+}
+
+.buttons {
+    margin: 1rem 0;
+    display: flex;
+    gap: 0.5rem;
+}
+
+button {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: #2e2e3f;
+    color: #fff;
+    font-size: 0.95rem;
+    line-height: 1.2;
+    transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+button:hover {
+    background-color: #3a3a55;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+}
+
+button:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 }
