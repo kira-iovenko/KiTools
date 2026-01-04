@@ -22,6 +22,12 @@ function loadTool(file){
             script.defer = true;
             document.body.appendChild(script);
         }
+        if(file ==="coin.html"){
+            const script = document.createElement("script");
+            script.src="js/coin.js";
+            script.defer = true;
+            document.body.appendChild(script);
+        }
     })
     .catch(err => {
         mainView.innerHTML = "<p>Error loading tool.</p>";
