@@ -1,11 +1,51 @@
-<div class="tool">
-    <h2>Whitespace Remover</h2>
-    <p>Removes extra spaces and cleans up text</p>
-    <textarea id="userText" placeholder="Insert text..."></textarea>
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>Whitespace Remover - KItools</title>
+    <link rel="stylesheet" href="../css/main.css">
+</head>
 
-    <div class="buttons">
-        <button id="cleanBtn">Clean Text</button>
-        <button id="copyBtn">Copy</button>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <h1>KItools</h1>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                </ul>
+                <p class="category">Text</p>
+                <ul>
+                    <span class="active">Whitespace Remover</span>
+                </ul>
+                
+                <p class="category">Times</p>
+                <ul>
+                    <li><a href="pomodoro.html">Pomodoro</a></li>
+                </ul>
+
+                <p class="category">Utility</p>
+                <ul>
+                    <li><a href="coin.html">Coin Flip</a></li>
+                </ul>
+            </nav>
+        </aside>
+        
+        <main class="main-view">
+            <div class="tool">
+                <h2>Whitespace Remover</h2>
+                <p>Removes extra spaces and cleans up text</p>
+                
+                <textarea id="userText" placeholder="Insert text..."></textarea>
+
+                <div class="buttons">
+                    <button id="cleanBtn">Clean Text</button>
+                    <button id="copyBtn">Copy</button>
+                </div>
+                
+                <textarea id="outputText" placeholder="Cleaned text..." readonly></textarea>
+            </div>
+        </main>
     </div>
-    <textarea id="outputText" placeholder="Cleaned text..." readonly></textarea>
-</div>
+    <script src="../js/whitespace.js"></script>
+</body>
+</html>

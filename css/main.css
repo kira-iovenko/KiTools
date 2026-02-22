@@ -17,23 +17,27 @@ html {
 
 .sidebar {
     width: 220px;
-    background-color: #2e2e3f;
+    background-color: #0f172a;
     color: #fff;
-    padding: 1.3rem;
+    padding: 1.5rem;
     overflow-y: auto;
 }
 
 .sidebar h1 {
-    font-size: 1.3rem;
-    margin-bottom: 1rem;
+    font-size: 1.4rem;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
 }
 
 .sidebar .category {
-    margin-top: 1rem;
+    margin-top: 1.2rem;
     margin-bottom: 0.5rem;
-    font-weight: bold;
-    font-size: 0.9rem;
-    color: #aaa;
+    font-weight: 600;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #94a3b8;
 }
 
 .sidebar ul {
@@ -44,23 +48,40 @@ html {
     margin-bottom: 0.5rem;
 }
 
-.sidebar a.tool-link {
-    color: #fff;
+.sidebar a{
+    color: #e6e9f2;
     text-decoration: none;
     display: block;
-    padding: 0.3rem 0.5rem;
-    border-radius: 4px;
-    transition: background 0.15s ease;
+    padding: 0.45rem 0.6rem;
+    border-radius: 8px;
+    transition: background 0.2s ease, color 0.2s ease, transform 0.1s ease;
+    position: relative;
 }
 
-.sidebar a.tool-link.active {
-    background-color: #5b5bd6;
+.sidebar a:hover {
+    background-color: #1f2a3d;
+    color:#5eead4;
+}
+
+.sidebar a.active {
+    background-color: #1f2a3d;
+    color: #5eead4;
+}
+
+.sidebar a.active::before {
+    content: "";
+    position: absolute;
+    left: -10px;
+    top: 6px;
+    width: 4px;
+    border-radius: 4px;
+    background-color: #5eead4;
 }
 
 .main-view {
     flex: 1;
     padding: 2rem;
-    background-color: #f6f6f8;
+    background-color: #f1f5f9;
     overflow-y: auto;
 }
 
@@ -68,13 +89,14 @@ textarea {
     width: 100%;
     min-height: 150px;
     margin-top: 1rem;
-    padding: 0.75rem;
+    padding: 0.9rem;
     font-family: monospace;
     resize: vertical;
-    border-radius: 8px;
-    border: 1px solid #444;
-    background-color: #1e1e2a;
-    color: #fff;
+    border-radius: 12px;
+    border: 1px solid #cbd5e1;
+    background-color: #ffffff;
+    color: #0f172a;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
 }
 
 .buttons {
@@ -84,20 +106,21 @@ textarea {
 }
 
 button {
-    padding: 0.5rem 1rem;
+    padding: 0.6rem 1.2rem;
     border: none;
-    border-radius: 8px;
+    border-radius: 10px;
     cursor: pointer;
-    background-color: #2e2e3f;
+    background-color: #0f172a;
     color: #fff;
     font-size: 0.95rem;
-    line-height: 1.2;
-    transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.1s ease;
+    transition: all 0.2s ease;
 }
 
 button:hover {
-    background-color: #3a3a55;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+    background-color: #5eead4;
+    color: #0f172a;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
 }
 
 button:active {
@@ -106,10 +129,11 @@ button:active {
 }
 
 .coin-flip {
+    min-height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: center;
     gap: 1rem;
 }
 
@@ -119,8 +143,8 @@ button:active {
 }
 
 .coin {
-    width: 100px;
-    height: 100px;
+    width: 200px;
+    height: 200px;
     position: relative;
     transform-style: preserve-3d;
     transition: transform 0.9s ease-in-out;
@@ -180,6 +204,9 @@ button:active {
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
+.coin-flip h2 {
+    font-size: 2rem;
+}
 .coin-flip h2,
 .coin-flip p {
     text-align: center;

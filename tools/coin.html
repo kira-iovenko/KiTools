@@ -1,16 +1,55 @@
-<div class="tool coin-flip">
-    <h2>Flip a Coin</h2>
-    <p>Just click the button.</p>
-    <div class="coin-wrapper">
-        <div class="coin" id="coin">
-            <div class="coin-side heads">Heads</div>
-            <div class="coin-side tails">Tails</div>
-        </div>
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>Coin Flip - KItools</title>
+    <link rel="stylesheet" href="../css/main.css">
+</head>
+
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <h1>KItools</h1>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                </ul>
+
+                <p class="category">Text</p>
+                <ul>
+                    <li><a href="whitespace.html">Whitespace Remover</a></li>
+                </ul>
+
+                <p class="category">Times</p>
+                <ul>
+                    <li><a href="pomodor.html">Pomodoro</a></li>
+                </ul>
+
+                <p class="category">Utility</p>
+                <ul>
+                    <span class="active">Coin Flip</span>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-view">
+            <div class="tool coin-flip">
+                <h2>Flip a Coin</h2>
+                <p>Just click the button.</p>
+
+                <div class="coin-wrapper">
+                    <div class="coin" id="coin">
+                        <div class="coin-side heads">Heads</div>
+                        <div class="coin-side tails">Tails</div>
+                    </div>
+                </div>
+
+                <button id="flipBtn">Flip</button>
+                <p id="result" class="coin-result">
+                    Heads or Tails?
+                </p>
+            </div>
+        </main>
     </div>
-
-    <button id="flipBtn">Flip</button>
-
-    <p id="result" class="coin-result">Heads or Tails?</p>
-</div>
-
-<script src="../js/coin.js"></script>
+    <script src="../js/coin.js"></script>
+</body>
+</html>
