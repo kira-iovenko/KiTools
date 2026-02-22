@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>Flashcards - KItools</title>
+    <link rel="stylesheet" href="../css/main.css">
+</head>
+
+<body>
+    <div class="container">
+        <main class="main-view">
+            <div class="flashcards-app">
+
+                <header class="flashcards-header">
+                    <h2>Flashcards</h2>
+                    <div class="flashcards-actions">
+                        <button id="addDeckBtn">New Deck</button>
+                        <input type="text" id="searchInput" placeholder="Search cards...">
+                    </div>
+                </header>
+
+                <div class="flashcards-layout">
+                    <aside class="deck-panel">
+                        <h3>Decks</h3>
+                        <ul id="decklist"></ul>
+                    </aside>
+
+                    <section class="card-panel">
+                        <div class="card-wrapper">
+                            <div class="flashcard" id="flashcard">
+                                <div class="card-side card-front">
+                                    <p>Select a deck</p>
+                                </div>
+
+                                <div class="card-side card-back">
+                                    <p id="cardBack">Answer here</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card-controls">
+                            <button id="prevCard">Previous</button>
+                            <button id="flipCard">Flip</button>
+                            <button id="nextCard">Next</button>
+                        </div>
+
+                        <div class="card-management">
+                            <button id="addCardBtn">Add Card</button>
+                        </div>
+                    </section>
+                </div>
+                <footer class="flashcards-footer">
+                    <p>Blah</p>
+                </footer>
+            </div>
+            <div id="modal" class="modal hidden">
+                <div class="modal-content">
+                    <h3 id="modalTitle">Add Card</h3>
+                    <input type="text" id="frontInput" placeholder="Question...">
+                    <input type="text" id="backInput" placeholder="Answer...">
+                    <div class="modal-buttons">
+                        <button id="saveBtn">Save</button>
+                        <button id="cancelBtn">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="../js/flashcards.js"></script>
+</body>

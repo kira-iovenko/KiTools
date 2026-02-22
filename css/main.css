@@ -63,12 +63,12 @@ html {
     color:#5eead4;
 }
 
-.sidebar a.active {
+.sidebar span.active {
     background-color: #1f2a3d;
     color: #5eead4;
 }
 
-.sidebar a.active::before {
+.sidebar span.active::before {
     content: "";
     position: absolute;
     left: -10px;
@@ -210,4 +210,48 @@ button:active {
 .coin-flip h2,
 .coin-flip p {
     text-align: center;
+}
+
+.card-wrapper {
+    perspective: 1000px;
+    width: 400px;
+    height: 250px;
+    margin: 2rem auto;
+}
+
+.flashcard {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.6s ease;
+    cursor: pointer;
+}
+.flashcard.flipped {
+    transform: rotateY(180deg);
+}
+
+.card-side {
+    position: absolute;
+    inset: 0;
+    border-radius: 16px;
+    background: white;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    text-align: center;
+    font-size: 1.2rem;
+    backface-visibility: hidden;
+}
+
+.card-front {
+    background:#ffffff;
+}
+
+.card-back {
+    background: #5eead4;
+    color:#0f172a;
+    transform: rotateY(180deg);
 }
