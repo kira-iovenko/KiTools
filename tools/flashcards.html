@@ -1,12 +1,35 @@
 <!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
-    <title>Flashcards - KItools</title>
+    <title>Flashcards - KITools</title>
     <link rel="stylesheet" href="../css/main.css">
 </head>
 
 <body>
     <div class="container">
+        <aside class="sidebar">
+            <h1>KITools</h1>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                </ul>
+                <p class="category">Text</p>
+                <ul>
+                    <li><a href="whitespace.html">Whitespace Remover</a></li>
+                </ul>
+
+                <p class="category">Times</p>
+                <ul>
+                    <li><a href="pomodoro.html">Pomodoro</a></li>
+                </ul>
+                
+                <p class="category">Utility</p>
+                <ul>
+                    <li><a href="coin.html">Coin Flip</a></li>
+                    <span class="active">Flashcards</span>
+                </ul>
+            </nav>
+        </aside>
         <main class="main-view">
             <div class="flashcards-app">
 
@@ -49,7 +72,8 @@
                     </section>
                 </div>
                 <footer class="flashcards-footer">
-                    <p>Blah</p>
+                    <p>List of cards:</p>
+                    <ul id="cardList"></ul>
                 </footer>
             </div>
             <div id="modal" class="modal hidden">
@@ -65,5 +89,5 @@
             </div>
         </main>
     </div>
-    <script src="../js/flashcards.js"></script>
+    <script src="../js/flashcards.js" defer></script>
 </body>
