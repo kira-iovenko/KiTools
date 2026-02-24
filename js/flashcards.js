@@ -18,6 +18,12 @@ const nextBtn = document.getElementById("nextCard");
 
 const cardList = document.getElementById("cardList");
 
+const modal = document.getElementById("modal");
+const saveBtn = document.getElementById("saveBtn");
+const cancelBtn = document.getElementById("cancelBtn");
+const frontInput = document.getElementById("frontInput");
+const backInput = document.getElementById("backInput");
+
 flipBtn.addEventListener("click", () => {
     flashcard.classList.toggle("flipped");
 });
@@ -62,7 +68,6 @@ function renderCard(){
     cardBack.textContent = card.back;
 
     flashcard.classList.remove("flipped");
-    renderCardList();
 }
 
 function renderCardList() {
@@ -74,16 +79,11 @@ function renderCardList() {
     deck.cards.forEach((card, index) => {
         const li = document.createElement("li");
         li.textContent = `${card.front} - ${card.back}`;
+        li.dataset.index = index;
 
         if (index === activeCardIndex) {
             li.classList.add("active-card");
         }
-
-        li.addEventListener("click", () => {
-            activeCardIndex = index;
-            renderCard();
-            renderCardList();
-        });
         cardList.appendChild(li);
     });
 }
@@ -116,15 +116,37 @@ addCardBtn.addEventListener("click", () => {
         alert("Select a deck first.");
         return;
     }
-    const front = prompt("Enter question:");
-    const back = prompt("Enter answer:");
 
-    if(!front || !back) return;
+    frontInput.value = "";
+    backInput.value = "";
+    modal.classList.remove("hidden");
 
+});
+
+saveBtn.addEventListener("click", () => {
+    if(activeDeckIndex === null) return;
+
+    const front = frontInput.value.trim();
+    const back = backInput.value.trim();
+
+    if(!front||!back) return;
     decks[activeDeckIndex].cards.push({front, back});
-    activeCardIndex = decks[activeDeckIndex].cards.length -1;
-
+    activeCardIndex = decks[activeDeckIndex].cards.length-1;
+    modal.classList.add("hidden");
     renderCard();
+    renderCardList();
+});
+
+cancelBtn.addEventListener("click", () => {
+    modal.classList.add("hidden");
+});
+
+cardList.addEventListener("click", (e) => {
+    if(e.target.tagName === "LI"){
+        activeCardIndex = Number(e.target.dataset.index);
+        renderCard();
+        renderCardList();
+    }
 });
 
 nextBtn.addEventListener("click", () => {
@@ -135,6 +157,7 @@ nextBtn.addEventListener("click", () => {
 
     activeCardIndex = (activeCardIndex + 1) % deck.cards.length;
     renderCard();
+    renderCardList();
 });
 
 prevBtn.addEventListener("click", () => {
@@ -145,4 +168,5 @@ prevBtn.addEventListener("click", () => {
 
     activeCardIndex = (activeCardIndex-1 + deck.cards.length) % deck.cards.length;
     renderCard();
+    renderCardList();
 });
