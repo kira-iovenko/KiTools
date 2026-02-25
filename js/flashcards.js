@@ -1,15 +1,27 @@
-
 let decks = [];
 let activeDeckIndex = null;
 let activeCardIndex = 0;
 
-const deckList = document.getElementById("decklist");
-const addDeckBtn = document.getElementById("addDeckBtn");
+const deckView = document.getElementById("deckView");
+const cardView = document.getElementById("cardView");
+
+const deckGrid=document.getElementById("deckGrid");
+const deckEmptyMessage = document.getElementById("deckEmptyMessage");
+const deckSearchInput = document.getElementById("deckSearchInput");
+
+const openDeckModalBtn = document.getElementById("addDeckBtn");
+const deckModal = document.getElementById("deckModal");
+const deckTitleInput = document.getElementById("deckTitleInput");
+const saveDeckBtn = document.getElementById("saveDeckBtn");
+const cancelDeckBtn = document.getElementById("cancelDeckBtn");
+
+const backToDecksBtn = document.getElementById("backToDecksBtn");
+
 const addCardBtn = document.getElementById("addCardBtn");
+const searchInut = document.getElementById("searchInput");
 
 const flashcard = document.getElementById("flashcard");
 const flipBtn = document.getElementById("flipCard");
-
 const cardFront = document.querySelector(".card-front p");
 const cardBack = document.getElementById("cardBack");
 
@@ -24,38 +36,45 @@ const cancelBtn = document.getElementById("cancelBtn");
 const frontInput = document.getElementById("frontInput");
 const backInput = document.getElementById("backInput");
 
-flipBtn.addEventListener("click", () => {
-    flashcard.classList.toggle("flipped");
-});
+function showDeckView(){
+    deckView.classList.remove("hidden");
+    cardView.classList.add("hidden");
+    activeDeckIndex = null;
+}
 
-flashcard.addEventListener("click", () => {
-    flashcard.classList.toggle("flipped");
-});
+function showCardView(index){
+    activeDeckIndex = index;
+    activeCardIndex = 0;
+    deckView.classList.add("hidden");
+    cardView.classList.remove("hidden");
+    renderCard();
+    renderCardList();
+}
 
 function renderDecks() {
-    deckList.innerHTML = "";
+    deckGrid.innerHTML = "";
+
+    if (decks.length === 0){
+        deckEmptyMessage.style.display = "block";
+        return;
+    }
+
+    deckEmptyMessage.style.display = "none";
+
     decks.forEach((deck, index) => {
-        const li = document.createElement("li");
-        li.textContent = deck.name;
-        li.dataset.index=index;
-
-        if(index === activeDeckIndex){
-            li.classList.add("active-deck");
-        }
-
-        deckList.appendChild(li);
+        const div = document.createElement("div");
+        div.className = "deck-widget";
+        div.dataset.index=index;
+        div.innerHTML = `<span>${deck.name}</span> <button data-index="${index}" class="delete-deck">x</button>`;
+        
+        deckGrid.appendChild(div);
     });
 }
 
 function renderCard(){
-    if(activeDeckIndex === null){
-        cardFront.textContent = "Select a deck";
-        cardBack.textContent = "";
-        return;
-    }
+    if(activeDeckIndex === null) return;
 
     const deck = decks[activeDeckIndex];
-
     if (!deck.cards.length){
         cardFront.textContent = "No cards in deck";
         cardBack.textContent= "";
@@ -63,10 +82,8 @@ function renderCard(){
     }
 
     const card = deck.cards[activeCardIndex];
-
     cardFront.textContent = card.front;
     cardBack.textContent = card.back;
-
     flashcard.classList.remove("flipped");
 }
 
@@ -78,45 +95,47 @@ function renderCardList() {
 
     deck.cards.forEach((card, index) => {
         const li = document.createElement("li");
-        li.textContent = `${card.front} - ${card.back}`;
+        li.textContent = card.front;
         li.dataset.index = index;
-
-        if (index === activeCardIndex) {
-            li.classList.add("active-card");
-        }
         cardList.appendChild(li);
     });
 }
+openDeckModalBtn.addEventListener("click", () => {
+    deckTitleInput.value = "";
+    deckModal.classList.remove("hidden");
+});
 
-addDeckBtn.addEventListener("click", () => {
-    const name = prompt("Enter deck name:");
-    if(!name) return;
-
-    decks.push({name, cards: []});
-    activeDeckIndex = decks.length-1;
-    activeCardIndex = 0;
-
+saveDeckBtn.addEventListener("click", () => {
+    const title = deckTitleInput.value.trim();
+    if(!title) return;
+    decks.push({name: title, cards: []});
+    deckModal.classList.add("hidden");
     renderDecks();
-    renderCard();
-    renderCardList();
 });
 
-deckList.addEventListener("click", (e) => {
-    if (e.target.tagName === "LI"){
-        activeDeckIndex = Number(e.target.dataset.index);
-        activeCardIndex = 0;
+cancelDeckBtn.addEventListener("click", () => {
+    deckModal.classList.add("hidden");
+});
+
+deckGrid.addEventListener("click", (e) => {
+    const deleteBtn = e.target.closest(".delete-deck");
+    const widget = e.target.closest(".deck-widget");
+
+    if(deleteBtn) {
+        const index = Number(deleteBtn.dataset.index);
+        decks.splice(index, 1);
         renderDecks();
-        renderCard();
-        renderCardList();
-    }
-});
-
-addCardBtn.addEventListener("click", () => {
-    if(activeDeckIndex === null){
-        alert("Select a deck first.");
         return;
     }
+    if (widget){
+        const index = Number(widget.dataset.index);
+        showCardView(index);
+    }
+});
 
+backToDecksBtn.addEventListener("click", showDeckView);
+
+addCardBtn.addEventListener("click", () => {
     frontInput.value = "";
     backInput.value = "";
     modal.classList.remove("hidden");
@@ -124,12 +143,10 @@ addCardBtn.addEventListener("click", () => {
 });
 
 saveBtn.addEventListener("click", () => {
-    if(activeDeckIndex === null) return;
-
     const front = frontInput.value.trim();
     const back = backInput.value.trim();
-
     if(!front||!back) return;
+
     decks[activeDeckIndex].cards.push({front, back});
     activeCardIndex = decks[activeDeckIndex].cards.length-1;
     modal.classList.add("hidden");
@@ -147,6 +164,10 @@ cardList.addEventListener("click", (e) => {
         renderCard();
         renderCardList();
     }
+});
+
+flipBtn.addEventListener("click", () => {
+    flashcard.classList.toggle("flipped");
 });
 
 nextBtn.addEventListener("click", () => {
@@ -170,3 +191,5 @@ prevBtn.addEventListener("click", () => {
     renderCard();
     renderCardList();
 });
+
+renderDecks();
