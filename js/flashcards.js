@@ -28,7 +28,7 @@ const cardBack = document.getElementById("cardBack");
 const prevBtn = document.getElementById("prevCard");
 const nextBtn = document.getElementById("nextCard");
 
-const cardList = document.getElementById("cardList");
+const cardList = document.getElementById("cardGrid");
 
 const modal = document.getElementById("modal");
 const saveBtn = document.getElementById("saveBtn");
@@ -94,10 +94,16 @@ function renderCardList() {
     const deck = decks[activeDeckIndex];
 
     deck.cards.forEach((card, index) => {
-        const li = document.createElement("li");
-        li.textContent = card.front;
-        li.dataset.index = index;
-        cardList.appendChild(li);
+        const container = document.createElement("div");
+        container.className = "card-container";
+        container.dataset.index = index;
+        container.innerHTML = `
+                <div class="card-widget">${card.front}</div> 
+                <div class="card-actions">
+                    <button class="edit-card" data-index="${index}">Edit</button>
+                    <button class="delete-card" data-index="${index}">Delete</button>
+                </div>`;
+        cardGrid.appendChild(container);
     });
 }
 openDeckModalBtn.addEventListener("click", () => {
@@ -139,7 +145,6 @@ addCardBtn.addEventListener("click", () => {
     frontInput.value = "";
     backInput.value = "";
     modal.classList.remove("hidden");
-
 });
 
 saveBtn.addEventListener("click", () => {
@@ -158,11 +163,41 @@ cancelBtn.addEventListener("click", () => {
     modal.classList.add("hidden");
 });
 
-cardList.addEventListener("click", (e) => {
-    if(e.target.tagName === "LI"){
-        activeCardIndex = Number(e.target.dataset.index);
+cardGrid.addEventListener("click", (e) => {
+    const editBtn = e.target.closest(".edit-card");
+    const deleteBtn = e.target.closest(".delete-card");
+    const widget = e.target.closest(".card-widget");
+    if(deleteBtn){
+        const index = Number(deleteBtn.dataset.index);
+        decks[activeDeckIndex].cards.splice(index, 1);
+        if(activeCardIndex >= decks[activeDeckIndex].cards.length){
+            activeCardIndex = decks[activeDeckIndex].cards.length - 1;
+        }
         renderCard();
         renderCardList();
+        return;
+    }
+    if(editBtn){
+        const index = Number(editBtn.dataset.index);
+        const card = decks[activeDeckIndex].cards[index];
+        frontInput.value = card.front;
+        backInput.value = card.back;
+        modal.classList.remove("hidden");
+        saveBtn.onclick = () => {
+            const front = frontInput.value.trim();
+            const back = backInput.value.trim();
+            if(!front||!back) return;
+
+            decks[activeDeckIndex].cards[index] = {front, back};
+            modal.classList.add("hidden");
+
+            saveBtn.onclick = null;
+        };
+        return;
+    }
+    if (widget){
+        activeCardIndex = Number(widget.dataset.index);
+        renderCard();
     }
 });
 

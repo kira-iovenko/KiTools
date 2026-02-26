@@ -232,6 +232,7 @@ button:active {
   transform-style: preserve-3d;
   transition: transform 0.6s ease;
   cursor: pointer;
+  will-change: transform;
 }
 .flashcard.flipped {
   transform: rotateY(180deg);
@@ -260,22 +261,6 @@ button:active {
   background: #5eead4;
   color: #0f172a;
   transform: rotateY(180deg);
-}
-
-#decklist,
-#cardList {
-    list-style: none;
-    padding: 0;
-}
-
-#cardList li{
-    padding: 0.4rem;
-    cursor: pointer;
-}
-
-#cardList li.active-card {
-    background: #5eead4;
-    font-weight: bold;
 }
 
 .modal-content {
@@ -325,18 +310,6 @@ button:active {
     box-shadow: 0 8px 20px rgba(0,0,0,0.15);
 }
 
-.deck-content h3 {
-    margin: 0;
-    font-size: 18px;
-
-}
-
-.deck-content  p{
-    margin-top: 8px;
-    font-size: 14px;
-    color: #666;
-}
-
 .delete-deck {
     position: absolute;
     top: 10px;
@@ -366,4 +339,48 @@ button:active {
     margin-top: 20px;
     color: #888;
     font-style: italic;
+}
+
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.card-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.card-widget {
+    width: 200px;
+    height: 200px;
+    background: white;
+    padding: 15px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 500;
+    justify-content: center;
+    word-break: break-word;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card-widget:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.card-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+.card-actions button {
+    font-size: 12px;
+    padding: 4px 8px;
 }
