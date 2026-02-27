@@ -1,6 +1,7 @@
 let decks = [];
 let activeDeckIndex = null;
 let activeCardIndex = 0;
+let editingIndex = null;
 
 const deckView = document.getElementById("deckView");
 const cardView = document.getElementById("cardView");
@@ -53,34 +54,28 @@ function showCardView(index){
 
 function renderDecks() {
     deckGrid.innerHTML = "";
-
     if (decks.length === 0){
         deckEmptyMessage.style.display = "block";
         return;
     }
-
     deckEmptyMessage.style.display = "none";
-
     decks.forEach((deck, index) => {
         const div = document.createElement("div");
         div.className = "deck-widget";
         div.dataset.index=index;
         div.innerHTML = `<span>${deck.name}</span> <button data-index="${index}" class="delete-deck">x</button>`;
-        
         deckGrid.appendChild(div);
     });
 }
 
 function renderCard(){
     if(activeDeckIndex === null) return;
-
     const deck = decks[activeDeckIndex];
     if (!deck.cards.length){
         cardFront.textContent = "No cards in deck";
         cardBack.textContent= "";
         return;
     }
-
     const card = deck.cards[activeCardIndex];
     cardFront.textContent = card.front;
     cardBack.textContent = card.back;
@@ -90,9 +85,7 @@ function renderCard(){
 function renderCardList() {
     cardList.innerHTML = "";
     if(activeDeckIndex === null) return;
-
     const deck = decks[activeDeckIndex];
-
     deck.cards.forEach((card, index) => {
         const container = document.createElement("div");
         container.className = "card-container";
@@ -103,7 +96,7 @@ function renderCardList() {
                     <button class="edit-card" data-index="${index}">Edit</button>
                     <button class="delete-card" data-index="${index}">Delete</button>
                 </div>`;
-        cardGrid.appendChild(container);
+        cardList.appendChild(container);
     });
 }
 openDeckModalBtn.addEventListener("click", () => {
@@ -126,7 +119,6 @@ cancelDeckBtn.addEventListener("click", () => {
 deckGrid.addEventListener("click", (e) => {
     const deleteBtn = e.target.closest(".delete-deck");
     const widget = e.target.closest(".deck-widget");
-
     if(deleteBtn) {
         const index = Number(deleteBtn.dataset.index);
         decks.splice(index, 1);
@@ -140,7 +132,6 @@ deckGrid.addEventListener("click", (e) => {
 });
 
 backToDecksBtn.addEventListener("click", showDeckView);
-
 addCardBtn.addEventListener("click", () => {
     frontInput.value = "";
     backInput.value = "";
@@ -151,19 +142,24 @@ saveBtn.addEventListener("click", () => {
     const front = frontInput.value.trim();
     const back = backInput.value.trim();
     if(!front||!back) return;
-
-    decks[activeDeckIndex].cards.push({front, back});
-    activeCardIndex = decks[activeDeckIndex].cards.length-1;
+    if (editingIndex !== null) {
+        decks[activeDeckIndex].cards[editingIndex] = {front, back};
+        editingIndex = null;
+    } else {
+        decks[activeDeckIndex].cards.push({front, back});
+        activeCardIndex = decks[activeDeckIndex].cards.length - 1;
+    }
     modal.classList.add("hidden");
     renderCard();
     renderCardList();
 });
 
 cancelBtn.addEventListener("click", () => {
+    editingIndex = null;
     modal.classList.add("hidden");
 });
 
-cardGrid.addEventListener("click", (e) => {
+cardList.addEventListener("click", (e) => {
     const editBtn = e.target.closest(".edit-card");
     const deleteBtn = e.target.closest(".delete-card");
     const widget = e.target.closest(".card-widget");
@@ -178,21 +174,11 @@ cardGrid.addEventListener("click", (e) => {
         return;
     }
     if(editBtn){
-        const index = Number(editBtn.dataset.index);
-        const card = decks[activeDeckIndex].cards[index];
+        editingIndex = Number(editBtn.dataset.index);
+        const card = decks[activeDeckIndex].cards[editingIndex];
         frontInput.value = card.front;
         backInput.value = card.back;
         modal.classList.remove("hidden");
-        saveBtn.onclick = () => {
-            const front = frontInput.value.trim();
-            const back = backInput.value.trim();
-            if(!front||!back) return;
-
-            decks[activeDeckIndex].cards[index] = {front, back};
-            modal.classList.add("hidden");
-
-            saveBtn.onclick = null;
-        };
         return;
     }
     if (widget){
@@ -205,26 +191,34 @@ flipBtn.addEventListener("click", () => {
     flashcard.classList.toggle("flipped");
 });
 
+flashcard.addEventListener("click", () => {
+    flashcard.classList.toggle("flipped");
+});
+
 nextBtn.addEventListener("click", () => {
     if (activeDeckIndex === null) return;
-
     const deck = decks[activeDeckIndex];
     if(!deck.cards.length) return;
-
     activeCardIndex = (activeCardIndex + 1) % deck.cards.length;
-    renderCard();
-    renderCardList();
+    animateCardChange("next");
 });
 
 prevBtn.addEventListener("click", () => {
     if (activeDeckIndex === null) return;
-
     const deck = decks[activeDeckIndex];
     if(!deck.cards.length) return;
-
     activeCardIndex = (activeCardIndex-1 + deck.cards.length) % deck.cards.length;
-    renderCard();
-    renderCardList();
+    animateCardChange("prev");
 });
 
+function animateCardChange(direction){
+    const cardChange = direction === "next"?"slide-left":"slide-right";
+    flashcard.classList.add(cardChange);
+    setTimeout(() => {
+        renderCard();
+        }, 175);
+    setTimeout(() => {
+        flashcard.classList.remove(cardChange);
+    }, 350);
+}
 renderDecks();
