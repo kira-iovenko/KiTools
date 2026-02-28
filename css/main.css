@@ -5,6 +5,18 @@
   font-family: system-ui, sans-serif;
 }
 
+:root {
+  --bg-main: #fdf6f0;
+  --bg-sidebar: #f8e8ee;
+  --bg-card: #ffffff;
+  --accent-primary: #f6a6b2;
+  --accent-secondary: #b8e0d2;
+  --accent-tertiary: #d5c6f5;
+  --text-main: #5a4a4a;
+  --text-light: #ffffff;
+  --border-soft: #f2dcdc;
+}
+
 body,
 html {
   height: 100%;
@@ -17,10 +29,11 @@ html {
 
 .sidebar {
   width: 220px;
-  background-color: #0f172a;
-  color: #fff;
+  background-color: var(--bg-sidebar);
+  color: var(--text-main);
   padding: 1.5rem;
   overflow-y: auto;
+  border-right: 2px solid var(--border-soft);
 }
 
 .sidebar h1 {
@@ -28,6 +41,7 @@ html {
   margin-bottom: 1.5rem;
   font-weight: 700;
   letter-spacing: 0.5px;
+  color: #c06c84;
 }
 
 .sidebar .category {
@@ -49,7 +63,7 @@ html {
 }
 
 .sidebar a {
-  color: #e6e9f2;
+  color: var(--text-main);
   text-decoration: none;
   display: block;
   padding: 0.45rem 0.6rem;
@@ -62,13 +76,14 @@ html {
 }
 
 .sidebar a:hover {
-  background-color: #1f2a3d;
-  color: #5eead4;
+  background-color: var(--accent-secondary);
+  color: #3d5a5a;
 }
 
 .sidebar span.active {
-  background-color: #1f2a3d;
-  color: #5eead4;
+
+  background-color: var(--accent-primary);
+  color: white;
 }
 
 .sidebar span.active::before {
@@ -82,8 +97,11 @@ html {
 .main-view {
   flex: 1;
   padding: 2rem;
-  background-color: #f1f5f9;
+  background-color: var(--bg-main);
+  background-image: radial-gradient(#f6d6dc 1px, transparent 1px);
+  background-size: 25px 25px;
   overflow-y: auto;
+
 }
 
 textarea {
@@ -109,24 +127,24 @@ textarea {
 button {
   padding: 0.6rem 1.2rem;
   border: none;
-  border-radius: 10px;
+  border-radius: 12px;
   cursor: pointer;
-  background-color: #0f172a;
-  color: #fff;
+  background-color: var(--accent-primary);
+  color: white;
   font-size: 0.95rem;
-  transition: all 0.2s ease;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 10px rgba(246, 166, 178, 0.4);
 }
 
 button:hover {
-  background-color: #5eead4;
-  color: #0f172a;
+  background-color: #f2859b;
   transform: translateY(-2px);
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 6px 14px rgba(31, 28, 30, 0.15);
 }
 
 button:active {
   transform: translateY(1px);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 6px rgba(31, 28, 30, 0.15);
 }
 
 .coin-flip {
@@ -148,64 +166,49 @@ button:active {
   height: 200px;
   position: relative;
   transform-style: preserve-3d;
-  transition: transform 0.9s ease-in-out;
+  transition: transform 1s cubic-bezier(.22,1.2,.36,1);
   border-radius: 50%;
   margin: 1rem 0;
+  box-shadow: 0 10px 25px rgba(246, 166, 178, 0.25), 0 0 35px rgba(246, 166, 178, 0.15);
 }
 
 .coin-side {
   position: absolute;
   inset: 0;
   border-radius: 50%;
-  background: #2e2e3f;
-  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.25);
+  background: linear-gradient(135deg, #fff0f5, #fdf6f0);
+  box-shadow: inset 0 0 0 3px #f6a6b2;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1rem;
+  font-size: 1.2rem;
   font-weight: bold;
   backface-visibility: hidden;
-  color: #fff;
+  color: var(--text-main);
 }
 
 .coin-side.heads {
   transform: rotateY(0deg);
+  background: linear-gradient(135deg, #fff0f5, #f6d6dc);
 }
 
 .coin-side.tails {
   transform: rotateY(180deg);
-}
-
-.coin::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  box-shadow: inset 0 0 0 2px rgba(0, 0, 0, 0.15);
+  background: linear-gradient(135deg, #dacef3, #edecfa);
 }
 
 .coin-flip #flipBtn {
-  padding: 0.7rem 1.5rem;
   font-size: 1rem;
-  background-color: #2e2e3f;
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition:
-    background-color 0.2s ease,
-    transform 0.1s ease,
-    box-shadow 0.1s ease;
+  box-shadow: 0 6px 15px rgba(246, 166, 178, 0.35);
 }
 
 .coin-flip #flipBtn:hover {
-  background-color: #4747c8;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  background-color: #f2859b;
+  transform: translateY(-2px);
 }
 
 .coin-flip #flipBtn:active {
   transform: translateY(1px);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
 .coin-flip h2 {
@@ -214,6 +217,16 @@ button:active {
 .coin-flip h2,
 .coin-flip p {
   text-align: center;
+}
+
+@keyframes bounce {
+  0% {transform: scale(1);}
+  50% {transform: scale(1.08);}
+  100% {transform: scale(1);}
+}
+
+.coin-wrapper.landed {
+  animation: bounce 0.3s ease;
 }
 
 .card-wrapper {
@@ -259,9 +272,9 @@ button:active {
 .card-side {
   position: absolute;
   inset: 0;
-  border-radius: 16px;
-  background: white;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+  border-radius: 20px;
+  background: var(--bg-card);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -272,12 +285,12 @@ button:active {
 }
 
 .card-front {
-  background: #ffffff;
+  background: linear-gradient(135deg, #ffffff, #fff0f5);
 }
 
 .card-back {
-  background: #5eead4;
-  color: #0f172a;
+  background: var(--accent-tertiary);
+  color: #4a4a4a;
   transform: rotateY(180deg);
 }
 
@@ -314,18 +327,18 @@ button:active {
 
 .deck-widget {
     position: relative;
-    background: white;
-    border-radius: 14px;
+    background: linear-gradient(135deg, #ffffff, #fff6ec);
+    border-radius: 18px;
     padding: 20px;
     cursor: pointer;
-    transition: all 0.2s ease;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
-    border: 1px solid #eee;
+    transition: all 0.25s ease;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+    border: 1px solid var(--border-soft);
 }
 
 .deck-widget:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    transform: translateY(-6px);
+    box-shadow: 0 12px 25px rgba(246,166,178,0.25);
 }
 
 .delete-deck {
@@ -335,9 +348,9 @@ button:active {
     width: 24px;
     height: 24px;
     border-radius: 50%;
-    border: 1.5px solid #e53935;
+    border: 2px solid #ff8a8a;
     background: transparent;
-    color: #e53935;
+    color: #ff8a8a;
     font-size: 14px;
     font-weight: bold;
     line-height: 1;
@@ -349,7 +362,7 @@ button:active {
 }
 
 .delete-deck:hover {
-  background: #e53935;
+  background: #ff8a8a;
   color: white;
 }
 
