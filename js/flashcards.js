@@ -19,7 +19,7 @@ const cancelDeckBtn = document.getElementById("cancelDeckBtn");
 const backToDecksBtn = document.getElementById("backToDecksBtn");
 
 const addCardBtn = document.getElementById("addCardBtn");
-const searchInut = document.getElementById("searchInput");
+const searchInput = document.getElementById("searchInput");
 
 const flashcard = document.getElementById("flashcard");
 const flipBtn = document.getElementById("flipCard");
@@ -36,7 +36,38 @@ const saveBtn = document.getElementById("saveBtn");
 const cancelBtn = document.getElementById("cancelBtn");
 const frontInput = document.getElementById("frontInput");
 const backInput = document.getElementById("backInput");
+const storageKey = "flashcards";
+const storageVersion = 1;
 
+function loadStorage(){
+    try{
+        const raw = localStorage.getItem(storageKey);
+        if (!raw) return;
+        const parsed = JSON.parse(raw);
+        if(!parsed.version|| parsed.version !== storageVersion){
+            console.warn("Mismatch of storage version, data is resetting.");
+            localStorage.removeItem(storageKey);
+            decks = [];
+            return;
+        }
+        if(!Array.isArray(parsed.decks)){
+            console.warn("Deck structure is invalid.");
+            return;
+        }
+        decks = parsed.decks;
+    } catch(error){
+        console.error("Failed to parse storage.", error);
+        decks=[];
+    }
+}
+function saveStorage(){
+    const data = {version: storageVersion, decks: decks};
+    try{
+        localStorage.setItem(storageKey, JSON.stringify(data));
+    } catch(error){
+        console.error("Failed saviing to storage.", error);
+    }
+}
 function showDeckView(){
     deckView.classList.remove("hidden");
     cardView.classList.add("hidden");
@@ -108,6 +139,7 @@ saveDeckBtn.addEventListener("click", () => {
     const title = deckTitleInput.value.trim();
     if(!title) return;
     decks.push({name: title, cards: []});
+    saveStorage();
     deckModal.classList.add("hidden");
     renderDecks();
 });
@@ -122,6 +154,7 @@ deckGrid.addEventListener("click", (e) => {
     if(deleteBtn) {
         const index = Number(deleteBtn.dataset.index);
         decks.splice(index, 1);
+        saveStorage();
         renderDecks();
         return;
     }
@@ -144,12 +177,14 @@ saveBtn.addEventListener("click", () => {
     if(!front||!back) return;
     if (editingIndex !== null) {
         decks[activeDeckIndex].cards[editingIndex] = {front, back};
+        activeCardIndex = editingIndex;
         editingIndex = null;
     } else {
         decks[activeDeckIndex].cards.push({front, back});
         activeCardIndex = decks[activeDeckIndex].cards.length - 1;
     }
     modal.classList.add("hidden");
+    saveStorage();
     renderCard();
     renderCardList();
 });
@@ -169,6 +204,7 @@ cardList.addEventListener("click", (e) => {
         if(activeCardIndex >= decks[activeDeckIndex].cards.length){
             activeCardIndex = decks[activeDeckIndex].cards.length - 1;
         }
+        saveStorage();
         renderCard();
         renderCardList();
         return;
@@ -221,4 +257,5 @@ function animateCardChange(direction){
         flashcard.classList.remove(cardChange);
     }, 350);
 }
+loadStorage();
 renderDecks();

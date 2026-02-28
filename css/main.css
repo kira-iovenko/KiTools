@@ -9,9 +9,9 @@
   --bg-main: #fdf6f0;
   --bg-sidebar: #f8e8ee;
   --bg-card: #ffffff;
-  --accent-primary: #f6a6b2;
-  --accent-secondary: #b8e0d2;
-  --accent-tertiary: #d5c6f5;
+  --accent-pink: #f6a6b2;
+  --accent-green: #b8e0d2;
+  --accent-purple: #d5c6f5;
   --text-main: #5a4a4a;
   --text-light: #ffffff;
   --border-soft: #f2dcdc;
@@ -76,22 +76,14 @@ html {
 }
 
 .sidebar a:hover {
-  background-color: var(--accent-secondary);
+  background-color: var(--accent-green);
   color: #3d5a5a;
 }
 
 .sidebar span.active {
 
-  background-color: var(--accent-primary);
+  background-color: var(--accent-pink);
   color: white;
-}
-
-.sidebar span.active::before {
-  content: "";
-  position: absolute;
-  left: -10px;
-  border-radius: 4px;
-  background-color: #5eead4;
 }
 
 .main-view {
@@ -129,7 +121,7 @@ button {
   border: none;
   border-radius: 12px;
   cursor: pointer;
-  background-color: var(--accent-primary);
+  background-color: var(--accent-pink);
   color: white;
   font-size: 0.95rem;
   transition: all 0.25s ease;
@@ -289,7 +281,7 @@ button:active {
 }
 
 .card-back {
-  background: var(--accent-tertiary);
+  background: var(--accent-purple);
   color: #4a4a4a;
   transform: rotateY(180deg);
 }
@@ -313,7 +305,6 @@ button:active {
     justify-content: center;
     z-index: 1000;
 }
-
 .hidden {
     display: none !important;
 }
@@ -410,8 +401,31 @@ button:active {
     display: flex;
     justify-content: space-between;
     margin-top: 10px;
+    gap: 10px;
 }
 .card-actions button {
     font-size: 12px;
     padding: 4px 8px;
+}
+
+.card-controls{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    gap: 20px;
+}
+
+.divider {
+  flex: none;
+  width: 0;
+  height: 2px;
+  margin: 16px auto 28px;
+  animation: drawDivider 0.5s ease-out forwards;
+  opacity: 0.5;
+  background-color: var(--accent-pink);
+}
+@keyframes drawDivider {
+  to {
+    width: 60%;
+  }
 }
