@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <title>Countdown - KITools</title>
+        <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <h1>KITools</h1>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                </ul>
+                <p class="category">Text</p>
+                <ul>
+                    <li><a href="whitespace.html">Whitespace Remover</a></li>
+                </ul>
+                <p class="category">Times</p>
+                <ul>
+                    <span class="active">Timer</span>
+                    <li><a href="pomodoro.html">Pomodoro</a></li>
+                </ul>
+                <p class="category">Utility</p>
+                <ul>
+                    <li><a href="coin.html">Coin Flip</a></li>
+                    <li><a href="flashcards.html">Flashcards</a></li>
+                </ul>
+            </nav>
+        </aside>
+        <main class="main-view">
+            <div class="tool timer">
+                <div id="setTime"class="setTime">
+                    <h2>Set a Timer</h2>
+                    <div class="time-input">
+                        <input type="number" id="hours" placeholder="hh" min="0" max="23">
+                        <span>:</span>
+                        <input type="number" id="minutes" placeholder="mm" min="0" max="59">
+                        <span>:</span>
+                        <input type="number" id="seconds" placeholder="ss" min="0" max="59">
+                    </div>
+                    <button id="continueToTimerBtn">Continue</button>
+                </div>
+                <div id="timeCircle" style="display:none;">
+                    <div class="progress">
+                        <svg width="220" height="220" viewBox="0 0 220 220">
+                            <circle cx="110" cy="110" r="100" stroke="#eee" stroke-width="12" fill="none"></circle>
+                            <circle id="progressCirc" cx="110" cy="110" r="100" stroke="#b8e0d2" stroke-width="12" fill="none" stroke-linecap="round" transform="rotate(-90 110 110)"></circle>    
+                        </svg>
+                        <div class="display" id="display">00:00:00</div>
+                    </div>
+                <div class="buttons time-buttons">
+                    <button id="startTimeBtn">Start</button>
+                    <button id="pauseTimeBtn">Pause</button>
+                    <button id="resetTimeBtn">Reset</button>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="../js/timer.js"></script>
+</body>
+</html>
