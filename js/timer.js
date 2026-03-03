@@ -5,9 +5,12 @@ let running=false;
 const setTime=document.getElementById("setTime");
 const timeCircle = document.getElementById("timeCircle");
 const display = document.getElementById("display");
-const hourInput = document.getElementById("hours");
-const minuteInput = document.getElementById("minutes");
-const secondsInput = document.getElementById("seconds");
+let hrArea=0;
+let minArea= 0;
+let secArea=0;
+const hrInput=document.getElementById("hrInput");
+const minInput=document.getElementById("minInput");
+const secInput=document.getElementById("secInput");
 const startTimeBtn = document.getElementById("startTimeBtn");
 const pauseTimeBtn = document.getElementById("pauseTimeBtn");
 const resetTimeBtn = document.getElementById("resetTimeBtn");
@@ -17,6 +20,12 @@ const circleLength = 2*Math.PI*100;
 
 progressCirc.style.strokeDashArray=circleLength;
 progressCirc.style.strokeDashoffset=0;
+
+function timeInputUpdate(){
+    hrInput.textContent = String(hrArea).padStart(2,"0");
+    minInput.textContent = String(minArea).padStart(2,"0");
+    secInput.textContent = String(secArea).padStart(2,"0");
+}
 function updateDisplay(seconds){
     let hrs = Math.floor(seconds/3600);
     let mins = Math.floor((seconds%3600) / 60);
@@ -50,16 +59,17 @@ resetTimeBtn.addEventListener("click", () => {
     clearInterval(countdown);
     seconds=0;
     running=false;
-    hourInput.value="";
-    minuteInput.value="";
-    secondsInput.value="";
+    hrArea=0;
+    minArea=0;
+    secArea=0;
+    timeInputUpdate();
     updateDisplay(0);
     timeCircle.style.display="none";
     setTime.style.display="block";
 });
 
 continueToTimerBtn.addEventListener("click", ()=> {
-    seconds = (parseInt(hourInput.value)||0)*3600+(parseInt(minuteInput.value)||0)*60+(parseInt(secondsInput.value)||0);
+    seconds = hrArea*3600+minArea *60 +secArea;
     if (seconds<=0) return;
     allSeconds = seconds;
     updateDisplay(seconds);
@@ -67,3 +77,21 @@ continueToTimerBtn.addEventListener("click", ()=> {
     setTime.style.display = "none";
     timeCircle.style.display = "block";
 });
+
+document.querySelectorAll(".timeArrow").forEach(btn => {
+    btn.addEventListener("click", () =>{
+        const target = btn.dataset.target;
+        const right = btn.classList.contains("right");
+        if(target === "hours"){
+            hrArea = right?(hrArea+1) %24:(hrArea-1+24)%24;
+        }
+        if(target === "minutes"){
+            minArea = right?(minArea+1)%60 :(minArea-1+60)%60;
+        }
+        if(target==="seconds"){
+            secArea = right?(secArea+1)%60:(secArea-1+60)%60;
+        }
+        timeInputUpdate();
+    });
+});
+timeInputUpdate();

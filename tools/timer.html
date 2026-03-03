@@ -34,11 +34,23 @@
                 <div id="setTime"class="setTime">
                     <h2>Set a Timer</h2>
                     <div class="time-input">
-                        <input type="number" id="hours" placeholder="hh" min="0" max="23">
+                        <div class="time-area">
+                            <button class="timeArrow left" data-target="hours">❮</button>
+                            <span id="hrInput">00</span>
+                            <button class="timeArrow right" data-target="hours">❯</button>
+                        </div>
                         <span>:</span>
-                        <input type="number" id="minutes" placeholder="mm" min="0" max="59">
+                        <div class="time-area">
+                            <button class="timeArrow left" data-target="minutes">❮</button>
+                            <span id="minInput">00</span>
+                            <button class="timeArrow right" data-target="minutes">❯</button>
+                        </div>
                         <span>:</span>
-                        <input type="number" id="seconds" placeholder="ss" min="0" max="59">
+                        <div class="time-area">
+                            <button class="timeArrow left" data-target="seconds">❮</button>
+                            <span id="secInput">00</span>
+                            <button class="timeArrow right" data-target="seconds">❯</button>
+                        </div>
                     </div>
                     <button id="continueToTimerBtn">Continue</button>
                 </div>
