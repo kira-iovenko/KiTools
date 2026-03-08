@@ -555,3 +555,7 @@ display: none;
   transform: translateY(-2px);
   background: #5c9b8c;
 }
+
+#exitStudyModeBtn{
+  display: none;
+}

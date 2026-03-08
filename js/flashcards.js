@@ -2,6 +2,7 @@ let decks = [];
 let activeDeckIndex = null;
 let activeCardIndex = 0;
 let editingIndex = null;
+let studyMode = false;
 
 const deckView = document.getElementById("deckView");
 const cardView = document.getElementById("cardView");
@@ -17,7 +18,7 @@ const saveDeckBtn = document.getElementById("saveDeckBtn");
 const cancelDeckBtn = document.getElementById("cancelDeckBtn");
 
 const backToDecksBtn = document.getElementById("backToDecksBtn");
-
+const exitStudyModeBtn = document.getElementById("exitStudyModeBtn");
 const addCardBtn = document.getElementById("addCardBtn");
 const searchInput = document.getElementById("searchInput");
 
@@ -94,7 +95,7 @@ function renderDecks() {
         const div = document.createElement("div");
         div.className = "deck-widget";
         div.dataset.index=index;
-        div.innerHTML = `<span>${deck.name}</span> <button data-index="${index}" class="delete-deck">x</button>`;
+        div.innerHTML = `<span>${deck.name}</span> <button class="study-deck" data-index="${index}">Study</button> <button data-index="${index}" class="delete-deck">x</button>`;
         deckGrid.appendChild(div);
     });
 }
@@ -149,6 +150,12 @@ cancelDeckBtn.addEventListener("click", () => {
 });
 
 deckGrid.addEventListener("click", (e) => {
+    const studyBtn = e.target.closest(".study-deck");
+    if(studyBtn) {
+        const index=Number(studyBtn.dataset.index);
+        studyModeOn(index);
+        return;
+    }
     const deleteBtn = e.target.closest(".delete-deck");
     const widget = e.target.closest(".deck-widget");
     if(deleteBtn) {
@@ -257,5 +264,58 @@ function animateCardChange(direction){
         flashcard.classList.remove(cardChange);
     }, 350);
 }
+
+deckSearchInput.addEventListener("input", () =>{
+    const term = deckSearchInput.value.toLowerCase();
+    const deckWidgets = document.querySelectorAll(".deck-widget");
+    deckWidgets.forEach(deck=>{
+        const name=deck.textContent.toLowerCase();
+        if (name.includes(term)){
+            deck.style.display = "";
+        } else{
+            deck.style.display="none";
+        }
+    });
+});
+searchInput.addEventListener("input",()=> {
+    const term = searchInput.value.toLowerCase();
+    const cards = document.querySelectorAll(".card-container");
+    cards.forEach(card =>{
+        const text=card.textContent.toLowerCase();
+        if(text.includes(term)){
+            card.style.display="";
+        }
+        else{
+            card.style.display="none";
+        }
+    });
+
+});
+
+function studyModeOn(index){
+    studyMode = true;
+    activeDeckIndex = index;
+    activeCardIndex = 0;
+    exitStudyModeBtn.style.display="block";
+    deckView.classList.add("hidden");
+    cardView.classList.remove("hidden");
+    addCardBtn.style.display = "none";
+    searchInput.style.display = "none";
+    backToDecksBtn.style.display = "none";
+    cardList.style.display="none";
+    renderCard();
+}
+function exitStudyMode(){
+    studyMode = false;
+    addCardBtn.style.display = "";
+    searchInput.style.display = "";
+    cardList.style.display="";
+    backToDecksBtn.style.display = "";
+    exitStudyModeBtn.style.display = "none";
+    showDeckView();
+}
+exitStudyModeBtn.addEventListener("click", exitStudyMode);
+
+
 loadStorage();
 renderDecks();
