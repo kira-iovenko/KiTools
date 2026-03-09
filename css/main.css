@@ -8,7 +8,7 @@
 :root {
   --bg-main: #fdf6f0;
   --bg-sidebar: #f8e8ee;
-  --bg-card: #ffffff;
+  --bg-card: #fefaf4;
   --accent-pink: #f6a6b2;
   --accent-green: #b8e0d2;
   --accent-purple: #d5c6f5;
@@ -352,11 +352,15 @@ body.dark-mode .deck-grid {
     position: relative;
     background: linear-gradient(135deg,var(--bg-card), var(--bg-main));
     border-radius: 18px;
-    padding: 20px;
+    padding: 22px 20px;
     cursor: pointer;
     transition: all 0.25s ease;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
     border: 1px solid var(--border-soft);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
 }
 
 .deck-widget:hover {
@@ -365,23 +369,16 @@ body.dark-mode .deck-grid {
 }
 
 .delete-deck {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
     border: 2px solid #ff8a8a;
     background: transparent;
     color: #ff8a8a;
     font-size: 14px;
     font-weight: bold;
-    line-height: 1;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: all 0.2s ease;
+    /* transition: all 0.2s ease; */
 }
 
 .delete-deck:hover {
@@ -431,6 +428,31 @@ body.dark-mode .card-widget {
 .card-widget:hover {
   transform: translateY(-4px);
   box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.deck-btns {
+  display: flex;
+  justify-content: center;
+  gap: 11px;
+  margin-top: 9px;
+}
+
+.deck-name{
+  font-weight: 560;
+  margin-bottom: 4px;
+  font-size: 1.15rem;
+  color: var(--text-main);
+  margin-bottom: 13px;
+}
+
+.study-deck {
+  background: var(--accent-green);
+  color: #2b3d33;
+  box-shadow: 0 4px 11px rgba(0,0,0,0.1);
+}
+
+.study-deck:hover {
+  background: #a9cbbf;
 }
 
 .card-actions {

@@ -95,7 +95,11 @@ function renderDecks() {
         const div = document.createElement("div");
         div.className = "deck-widget";
         div.dataset.index=index;
-        div.innerHTML = `<span>${deck.name}</span> <button class="study-deck" data-index="${index}">Study</button> <button data-index="${index}" class="delete-deck">x</button>`;
+        div.innerHTML = `<span class="deck-name">${deck.name}</span> 
+        <div class="deck-btns">
+            <button class="study-deck" data-index="${index}">Study</button>
+            <button data-index="${index}" class="delete-deck">x</button>
+        </div>`;
         deckGrid.appendChild(div);
     });
 }

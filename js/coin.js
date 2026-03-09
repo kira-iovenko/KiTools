@@ -18,7 +18,6 @@ flipBtn.addEventListener("click", () => {
         if(event.propertyName !== "transform") return;
         result.textContent = isHeads ? "Heads!":"Tails!";
         coin.parentElement.classList.add("landed");
-        // coin.removeEventListener("transitionend", onEnd);
     };
     coin.addEventListener("transitionend", onEnd, {once: true});
 });
