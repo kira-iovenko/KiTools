@@ -116,7 +116,7 @@ p{
   flex: 1;
   padding: 2rem;
   background-color: var(--bg-main);
-  background-image: radial-gradient(var(--border-soft)) 1px, transparent 1px);
+  background-image: radial-gradient(var(--border-soft) 1px, transparent 1px);
   background-size: 25px 25px;
   overflow-y: auto;
 }
@@ -378,7 +378,6 @@ body.dark-mode .deck-grid {
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    /* transition: all 0.2s ease; */
 }
 
 .delete-deck:hover {
@@ -580,4 +579,59 @@ display: none;
 
 #exitStudyModeBtn{
   display: none;
+}
+
+.pomodoro {
+  text-align: center;
+  margin-top: 30px;
+  border-radius: 18px;
+  background: linear-gradient(135deg,var(--bg-card),var(--bg-main));
+  padding: 40px 30px;
+  max-width: 440px;
+  margin-left: auto;
+  margin-right: auto;
+  border: 1px solid var(--border-soft);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+}
+
+#pomodoroTimer {
+  font-size: 4rem;
+  font-weight: bold;
+  letter-spacing: 4px;
+  margin: 25px 0;
+  color: var(--text-main);
+}
+.pomodoroBtns{
+  display: flex;
+  justify-content: center;
+  gap:12px;
+  margin-bottom: 20px;
+}
+.pomodoroBtns button{
+  min-width: 90px;
+}
+.pomodoroMode{
+  display: flex;
+  justify-content: center;
+  gap:13px;
+}
+.pomodoroMode button{
+  box-shadow: 0 4px 10px rgba(213, 198, 245, 0.4);
+  background: var(--accent-purple);
+}
+.pomodoroMode button:hover{
+  background: #bfaef0;
+}
+.pomodoroMode button:active{
+  color: #2b3d33;
+  background: var(--accent-green);
+  box-shadow: 0 5px 13px rgba(0,0,0,0.15);
+}
+@keyframes pulsePomodoro{
+  0%{transform:scale(1)}
+  50%{transform: scale(1.06)}
+  100%{transform: scale(1)}
+}
+.timer-end{
+  animation:pulsePomodoro 0.5s ease 3;
 }
