@@ -17,6 +17,7 @@ const resetTimeBtn = document.getElementById("resetTimeBtn");
 const continueToTimerBtn = document.getElementById("continueToTimerBtn");
 const progressCirc=document.getElementById("progressCirc");
 const circleLength = 2*Math.PI*100;
+const alarm = new Audio("../sounds/timer-alarm.mp3");
 
 progressCirc.style.strokeDashArray=circleLength;
 progressCirc.style.strokeDashoffset=0;
@@ -32,14 +33,27 @@ function updateDisplay(seconds){
     let secs = seconds % 60;
     display.textContent = String(hrs).padStart(2, "0") + ":" + String(mins).padStart(2,"0")+ ":"+ String(secs).padStart(2,"0");
 }
+
+function stopAlarm(){
+    alarm.pause();
+    alarm.currentTime = 0;
+}
+
 startTimeBtn.addEventListener("click", () => {
+    stopAlarm();
     if(running) return;
     running=true;
     countdown = setInterval(() => {
         if(seconds <=0){
             clearInterval(countdown);
             running=false;
-            alert("Timer over!");
+            seconds = 0;
+            updateDisplay(0);
+            progressCirc.style.strokeDashoffset = circleLength;
+            alarm.loop = true;
+            alarm.play();
+            display.textContent = "Time's up!";
+            display.classList.add("timer-done");
             return;
         }
         seconds--;
@@ -57,6 +71,7 @@ pauseTimeBtn.addEventListener("click", () => {
 
 resetTimeBtn.addEventListener("click", () => {
     clearInterval(countdown);
+    stopAlarm();
     seconds=0;
     running=false;
     hrArea=0;
@@ -64,8 +79,10 @@ resetTimeBtn.addEventListener("click", () => {
     secArea=0;
     timeInputUpdate();
     updateDisplay(0);
+    progressCirc.style.strokeDashoffset = 0;
     timeCircle.style.display="none";
     setTime.style.display="block";
+    display.classList.remove("timer-done");
 });
 
 continueToTimerBtn.addEventListener("click", ()=> {
