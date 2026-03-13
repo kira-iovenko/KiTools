@@ -3,6 +3,8 @@ const guideText = document.getElementById("guideText");
 const talking = "images/queenie_talking.png";
 const neutral = "images/queenie_neutral.png";
 const textbox = document.querySelector(".textbox");
+const blinking = "images/queenie_blinking.png";
+
 let talkingInterval;
 let typingInterval;
 let dialogues = [];
@@ -15,7 +17,8 @@ function talk() {
 }
 function stopTalking() {
     clearInterval(talkingInterval);
-    queenie.src = neutral;
+    talkingInterval = null;
+    queenie.src=neutral;
 }
 
 function textAppear(text, callback) {
@@ -64,10 +67,29 @@ if(!localStorage.getItem("visitedBefore")){
 document.querySelector(".textbox").addEventListener("click", () => {
     if(typing){
         clearInterval(typingInterval);
-        guideText.textContent = dialogues[currentMessage -1];
+        guideText.textContent = dialogues[currentDialogue -1];
         stopTalking();
         typing = false;
     } else{
         nextDialogue();
     }
 });
+
+function blinkRandomly(){
+    function blinkCycle(){
+        const delay = 3500 + Math.random()*3500;
+        setTimeout(() => {
+            if(!talkingInterval && !typing){
+                queenie.src=blinking;
+                setTimeout(()=> {
+                    queenie.src= neutral;
+                    blinkCycle();
+                }, 150);
+            } else{
+                blinkCycle();
+            }
+        }, delay);
+    }
+    blinkCycle();
+}
+blinkRandomly();
