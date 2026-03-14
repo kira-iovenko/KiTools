@@ -1,10 +1,10 @@
 <!DOCTYPE html>
+<html>
 <head>
     <meta charset="UTF-8">
-    <title>Pomodoro - KITools</title>
+    <title>Extract html</title>
     <link rel="stylesheet" href="../css/main.css">
 </head>
-
 <body>
     <div class="container">
         <aside class="sidebar">
@@ -13,19 +13,16 @@
                 <ul>
                     <li><a href="../index.html">Home</a></li>
                 </ul>
-
                 <p class="category">Text</p>
                 <ul>
                     <li><a href="whitespace.html">Whitespace Remover</a></li>
-                    <li><a href="preview-html.html">HTML Preview</a></li>
+                    <span class="active">HTML Preview</span>
                 </ul>
-
                 <p class="category">Times</p>
                 <ul>
                     <li><a href="timer.html">Timer</a></li>
-                    <span class="active">Pomodoro</span>
+                    <li><a href="pomodoro.html">Pomodoro</a></li>
                 </ul>
-
                 <p class="category">Utility</p>
                 <ul>
                     <li><a href="coin.html">Coin Flip</a></li>
@@ -35,23 +32,16 @@
             <button id="darkMode">Dark Mode</button>
         </aside>
         <main class="main-view">
-            <div class="tool">
-                <h2>Pomodoro</h2>
-                <div class="pomodoro">
-                    <div id="pomodoroTimer">25:00</div>
-                    <div class="pomodoroBtns">
-                        <button id="pomodoroStart">Start</button>
-                        <button id="pomodoroPause">Pause</button>
-                        <button id="pomodoroReset">Reset</button>
-                    </div>
-                    <div class="pomodoroMode">
-                        <button id="work">Work</button>
-                        <button id="break">Break</button>
-                    </div>
+            <div class="tool split-preview">
+                <h2>HTML Preview</h2>
+                <div class="editor-preview">
+                    <textarea id="inputHtml" placeholder="Paste/type HTML here..."></textarea>
+                    <iframe id="previewFrame"></iframe>
                 </div>
+                <button id="previewTextBtn">Preview Text</button>
             </div>
         </main>
     </div>
-    <script src="../js/pomodoro.js"></script>
+    <script src="../js/preview-html.js"></script>
     <script src="../js/script.js"></script>
-</body>
+</body> 
