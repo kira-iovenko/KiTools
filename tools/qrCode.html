@@ -35,11 +35,16 @@
         <main class="main-view">
             <div class="tool">
                 <h2>QR Code Generator</h2>
-                <input type="text" id="qrInput" placeholder="Enter text, URL, etc...">
-                <br></br>
-                <button id="generateQrBtn">Generate QR Code</button>
-                <button id="downloadQrBtn">Download QR Code</button>
-                <div id="qrCode"></div>
+                <div class="qrCode-container">
+                    <div class="qrCode-info">
+                        <input type="text" id="qrInput" placeholder="Enter text, URL, etc...">
+                        <button id="downloadQrBtn">Download QR Code</button>
+                    </div>
+                    <div class="qrCode-display">
+                        <p class="qrCode-widget-label">QR code will appear here:</p>
+                        <div id="qrCode"></div>
+                    </div>                   
+                </div>
             </div>
         </main>
     </div>

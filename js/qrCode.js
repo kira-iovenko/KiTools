@@ -3,21 +3,25 @@ const generateQrBtn = document.getElementById("generateQrBtn");
 const qrDiv = document.getElementById("qrCode");
 const downloadQrBtn = document.getElementById("downloadQrBtn");
 
-let qrCode;
+let qrCode = null;
 
-generateQrBtn.addEventListener("click", () => {
-    const text = qrInput.value;
+function generateQr(){
+    const text = qrInput.value.trim();
     if(text.trim() === ""){
-        alert("You have to enter something first...");
+        qrDiv.innerHTML = "";
+        qrCode = null;
         return;
     }
-    qrDiv.innerHTML = "";
+    qrDiv.innerHTML="";
+    const maxSize = Math.max(250, Math.min(qrDiv.clientWidth, qrDiv.clientHeight));
     qrCode = new QRCode(qrDiv, {
         text: text,
-        width: 250,
-        height: 250
+        width: maxSize,
+        height: maxSize
     });
-});
+}
+qrInput.addEventListener("input", generateQr);
+
 
 downloadQrBtn.addEventListener("click", () => {
     const img = qrDiv.querySelector("img");
