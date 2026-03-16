@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
-    <title>Coin Flip - KITools</title>
+    <title>QR Code Generator - KITools</title>
     <link rel="stylesheet" href="../css/main.css">
 </head>
 <body>
@@ -13,46 +13,37 @@
                 <ul>
                     <li><a href="../index.html">Home</a></li>
                 </ul>
-
                 <p class="category">Text</p>
                 <ul>
                     <li><a href="whitespace.html">Whitespace Remover</a></li>
                     <li><a href="preview-html.html">HTML Preview</a></li>
                 </ul>
-
                 <p class="category">Times</p>
                 <ul>
                     <li><a href="timer.html">Timer</a></li>
                     <li><a href="pomodoro.html">Pomodoro</a></li>
                 </ul>
-
                 <p class="category">Utility</p>
                 <ul>
-                    <span class="active">Coin Flip</span>
+                    <li><a href="coin.html">Coin Flip</a></li>
                     <li><a href="flashcards.html">Flashcards</a></li>
-                    <li><a href="qrCode.html">QR Code Generator</a></li>
+                    <span class="active">QR Code Generator</span>
                 </ul>
             </nav>
             <button id="darkMode">Dark Mode</button>
         </aside>
         <main class="main-view">
-            <div class="tool coin-flip">
-                <h2>Flip a Coin</h2>
-                <p>Just click the button.</p>
-                <div class="coin-wrapper">
-                    <div class="coin" id="coin">
-                        <div class="coin-side heads">Heads</div>
-                        <div class="coin-side tails">Tails</div>
-                    </div>
-                </div>
-                <button id="flipBtn">Flip</button>
-                <p id="result" class="coin-result">
-                    Heads or Tails?
-                </p>
+            <div class="tool">
+                <h2>QR Code Generator</h2>
+                <input type="text" id="qrInput" placeholder="Enter text, URL, etc...">
+                <br></br>
+                <button id="generateQrBtn">Generate QR Code</button>
+                <button id="downloadQrBtn">Download QR Code</button>
+                <div id="qrCode"></div>
             </div>
         </main>
     </div>
-    <script src="../js/coin.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="../js/qrCode.js"></script>
     <script src="../js/script.js"></script>
 </body>
-</html>

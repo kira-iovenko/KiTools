@@ -736,5 +736,20 @@ display: none;
 }
 
 #previewTextBtn{
-  margin-top: 20px;
+  margin-top: 21px;
+}
+
+#qrCode{
+  margin-top: 28px;
+}
+
+#qrInput{
+  padding: 11px 20px;
+  font-size:16px;
+  width: 300px;
+  margin-top: 40px;
+}
+
+#generateQrBtn{
+  margin-right: 10px;
 }
