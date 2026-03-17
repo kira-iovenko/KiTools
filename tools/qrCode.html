@@ -38,12 +38,19 @@
                 <div class="qrCode-container">
                     <div class="qrCode-info">
                         <input type="text" id="qrInput" placeholder="Enter text, URL, etc...">
-                        <button id="downloadQrBtn">Download QR Code</button>
+                        <label>Foreground color: </label>
+                        <input type="color" id="qrColor" value="#000000">
+                        <label>Background color: </label>
+                        <input type="color" id="qrBgColor" value="#ffffff">
                     </div>
-                    <div class="qrCode-display">
-                        <p class="qrCode-widget-label">QR code will appear here:</p>
-                        <div id="qrCode"></div>
-                    </div>                   
+                    <div class="qrCode-right">
+                        <div class="qrCode-display">
+                            <p class="qrCode-widget-label">QR code will appear here:</p>
+                            <div id="qrCode"></div>
+                        </div>
+                        <button id="downloadQrBtn">Download QR Code</button>
+                    </div>        
+                    
                 </div>
             </div>
         </main>

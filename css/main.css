@@ -790,8 +790,22 @@ display: none;
 }
 
 #downloadQrBtn{
-  margin-top: 10px;
   cursor: pointer;
   padding: 10px 20px;
-  align-self: flex-start;
+}
+
+.qrCode-right{
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+
+.qrCode-info input[type="color"]{
+  width: 60x;
+  height: 35px;
+  cursor: pointer;
+  border: none;
+  margin-bottom: 10px;
 }
