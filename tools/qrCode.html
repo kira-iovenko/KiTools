@@ -37,7 +37,23 @@
                 <h2>QR Code Generator</h2>
                 <div class="qrCode-container">
                     <div class="qrCode-info">
+                        <label>Qr Type: </label>
+                        <select id="qrType">
+                            <option value="text">Text</option>
+                            <option value="url">URL</option>
+                            <option value="phone">Phone</option>
+                            <option value="wifi">Wifi</option>
+                        </select>
                         <input type="text" id="qrInput" placeholder="Enter text, URL, etc...">
+                        <div id="qrWifiField" style="display: none;">
+                            <input type="text" id="wifiSSID"placeholder="SSID">
+                            <input type="text" id="wifiPassword" placeholder="Password">
+                            <select id="encryptionWifi">
+                                <option value="WPA">WPA/WPA2</option>
+                                <option value="WEP">WEP</option>
+                                <option value="nopass">No password</option>
+                            </select>
+                        </div>
                         <label>Foreground color: </label>
                         <input type="color" id="qrColor" value="#000000">
                         <label>Background color: </label>

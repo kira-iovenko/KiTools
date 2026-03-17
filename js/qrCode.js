@@ -3,11 +3,40 @@ const qrDiv = document.getElementById("qrCode");
 const downloadQrBtn = document.getElementById("downloadQrBtn");
 const qrColor = document.getElementById("qrColor");
 const qrBgColor = document.getElementById("qrBgColor");
+const qrType = document.getElementById("qrType");
+const wifiFields = document.getElementById("qrWifiField");
+const wifiSSID = document.getElementById("wifiSSID");
+const wifiPassword = document.getElementById("wifiPassword");
+const wifiEncryption = document.getElementById("encryptionWifi");
 
 let qrCode = null;
 
 function generateQr(){
-    const text = qrInput.value.trim();
+    let text = "";
+    if(qrType.value === "text"){
+        text = qrInput.value.trim();
+    }
+    else if(qrType.value === "url"){
+        let url = qrInput.value.trim();
+        if(url && !url.startsWith("http")){
+            url = "https://" + url;
+        }
+        text = url;
+    }
+    else if (qrType.value === "phone"){
+        const phone = qrInput.value.trim();
+        text = phone ? "tel:" + phone:"";
+    }
+    else if(qrType.value === "wifi"){
+        const ssid = wifiSSID.value.trim();
+        const password = wifiPassword.value.trim();
+        const encryption = wifiEncryption.value;
+        if(ssid === ""){
+            text = "";
+        } else{
+            text = `WIFI:T:${encryption};S:${ssid};P:${password};;`
+        }
+    } 
     if(text.trim() === ""){
         qrDiv.innerHTML = "";
         qrCode = null;
@@ -32,6 +61,23 @@ function generateQr(){
 qrInput.addEventListener("input", generateQr);
 qrColor.addEventListener("input", generateQr);
 qrBgColor.addEventListener("input", generateQr);
+wifiSSID.addEventListener("input", generateQr);
+wifiPassword.addEventListener("input", generateQr);
+wifiEncryption.addEventListener("change", generateQr);
+qrType.addEventListener("change", () =>{
+    if(qrType.value === "wifi"){
+        wifiFields.style.display = "block";
+        qrInput.style.display = "none";
+        qrInput.value = "";
+    } else{
+        wifiFields.style.display = "none";
+        qrInput.style.display = "block";
+        wifiSSID.value = "";
+        wifiPassword.value = "";
+        wifiEncryption.value = "WPA";
+    }
+    generateQr();
+});
 
 downloadQrBtn.addEventListener("click", () => {
     const img = qrDiv.querySelector("img");
