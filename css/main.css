@@ -15,7 +15,9 @@
   --text-main: #5a4a4a;
   --text-light: #ffffff;
   --border-soft: #f2dcdc;  
-  --progress-circle-bg: #eee;
+  --progress-circle-bg: #eeeeee;
+  --progress-circle-color: #b8e0d2;
+  --bg-dots: rgb(251, 186, 197);
 }
 
 body.dark-mode{
@@ -28,7 +30,9 @@ body.dark-mode{
   --bg-sidebar: #1c1c26;
   --bg-card: #27232f;
   --border-soft: #322f3d;
-  --progress-circle-color: #1f1f2c;
+  --progress-circle-bg: #1f1f2c;
+  --progress-circle-color: #59d4b5;
+  --bg-dots: #514c66; 
 }
 
 body,
@@ -118,7 +122,7 @@ p{
   flex: 1;
   padding: 2rem;
   background-color: var(--bg-main);
-  background-image: radial-gradient(var(--border-soft) 1px, transparent 1px);
+  background-image: radial-gradient(var(--bg-dots) 1px, transparent 1px);
   background-size: 25px 25px;
   overflow-y: auto;
 }
