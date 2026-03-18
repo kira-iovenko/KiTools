@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Extract HTML - KITools</title>
+    <title>Github Banner - KITools</title>
     <link rel="stylesheet" href="../css/main.css">
 </head>
 <body>
@@ -16,12 +16,12 @@
                 <p class="category">Text</p>
                 <ul>
                     <li><a href="whitespace.html">Whitespace Remover</a></li>
-                    <span class="active">HTML Preview</span>
+                    <li><a href="preview-html.html">HTML Preview</a></li>
                 </ul>
                 <p class="category">Times</p>
                 <ul>
                     <li><a href="timer.html">Timer</a></li>
-                    <li><a href="pomodoro.html">Pomodoro</a></li>
+                    <li><a href="pomodoro.html">Pomodoro</a></li>                    
                 </ul>
                 <p class="category">Utility</p>
                 <ul>
@@ -31,22 +31,31 @@
                 <p class="category">Design</p>
                 <ul>
                     <li><a href="qrCode.html">QR Code Generator</a></li>
-                    <li><a href="banner.html">Banner Generator</a></li>
+                    <span class="active">Banner Generator</span>
                 </ul>
             </nav>
             <button id="darkMode">Dark Mode</button>
         </aside>
         <main class="main-view">
-            <div class="tool split-preview">
-                <h2>HTML Preview</h2>
-                <div class="editor-preview">
-                    <textarea id="inputHtml" placeholder="Paste/type HTML here..."></textarea>
-                    <iframe id="previewFrame"></iframe>
+            <div class="tool banner-generator">
+                <div class="banner-info">
+                    <h2>Github Banner Generator</h2>
+                    <input type="text" id="bannerTitleInput" placeholder="Title">
+                    <input type="text" id="bannerSubtitleInput" placeholder="Subtitle">
+                    <label>Background Color</label>
+                    <input type="color" id="bannerBgColor" value="#b8e0d2">
+                    <label>Title Size</label>
+                    <input type="range" id="bannerTitleSize" min="20" max="80" value="48">
+                    <button id="downloadBannerBtn">Download Banner</button>
                 </div>
-                <button id="previewTextBtn">Preview Text</button>
+                <div class="banner-display" id="banner">
+                    <h1 id="bannerTitle">Title</h1>
+                    <p id="bannerSubtitle">Subtitle</p>
+                </div>
             </div>
         </main>
     </div>
-    <script src="../js/preview-html.js"></script>
+    <script src="../js/banner.js"></script>
     <script src="../js/script.js"></script>
-</body> 
+</body>
+</html>
