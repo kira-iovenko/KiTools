@@ -837,11 +837,12 @@ display: none;
   height: 250px;
   border-radius: 18px;
   background: var(--accent-green);
-  display: flex;
+  position: relative;
+  /* display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  text-align: center;
+  text-align: center; */
   max-width: 800px;
   padding: 21px;
   color: #2b3d33;
@@ -866,4 +867,30 @@ display: none;
 .banner-info label{
   color: var(--text-main);
   margin-top: 20px;
+}
+#downloadBannerBtn{
+  width: auto;
+  align-self: center;
+  max-width: fit-content;
+  margin-top: 10px;
+}
+#banner {
+  position: relative;
+}
+
+#bannerTitle,
+#bannerSubtitle {
+  cursor: grab;
+  position: absolute;
+  user-select: none;
+  transition: none;
+}
+#bannerTitle{
+  top: 100px;
+  left: 200px;
+}
+
+#bannerSubtitle{
+  top: 160px;
+  left: 200px;
 }
