@@ -49,8 +49,12 @@ function makeDraggable(text){
     text.addEventListener("mousedown", (e) => {
         currentlyMoving = text;
         const box = text.getBoundingClientRect();
+        const bannerBox = banner.getBoundingClientRect();
         offsetX = e.clientX - box.left;
         offsetY = e.clientY - box.top;
+        text.style.transform = "none";
+        text.style.left = (box.left - bannerBox.left)+"px";
+        text.style.top = (box.top - bannerBox.top) + "px";
         text.style.cursor = "grabbing";
     });
 }
@@ -70,6 +74,11 @@ document.addEventListener("mousemove", (e) => {
     const bannerBox = banner.getBoundingClientRect();
     let x2 = e.clientX - bannerBox.left - offsetX;
     let y2 = e.clientY - bannerBox.top - offsetY;
+    const currentTextBox = currentlyMoving.getBoundingClientRect();
+    const limitingX = bannerBox.width - currentTextBox.width;
+    const limitingY = bannerBox.height - currentTextBox.height;
+    x2 = Math.max(0, Math.min(x2, limitingX));
+    y2 = Math.max(0, Math.min(y2, limitingY));
     currentlyMoving.style.left = x2+"px";
     currentlyMoving.style.top = y2+"px";
 });

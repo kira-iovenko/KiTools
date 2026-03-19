@@ -838,11 +838,6 @@ display: none;
   border-radius: 18px;
   background: var(--accent-green);
   position: relative;
-  /* display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center; */
   max-width: 800px;
   padding: 21px;
   color: #2b3d33;
@@ -884,13 +879,13 @@ display: none;
   position: absolute;
   user-select: none;
   transition: none;
+  left: 50%;
+  transform: translateX(-50%);
 }
 #bannerTitle{
-  top: 100px;
-  left: 200px;
+  top: 35%;
 }
 
 #bannerSubtitle{
-  top: 160px;
-  left: 200px;
+  top: 60%;
 }
