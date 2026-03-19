@@ -831,6 +831,12 @@ display: none;
   max-width: 300px;
 }
 
+.banner-info-controls{
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
 .banner-display{
   margin-top: 20px;
   width: 100%;
@@ -848,6 +854,7 @@ display: none;
   padding: 10px;
   border: 1px solid var(--border-soft);
   border-radius: 9px;
+  width: 100%;
 }
 
 .banner-display h1{
@@ -861,8 +868,8 @@ display: none;
 
 .banner-info label{
   color: var(--text-main);
-  margin-top: 20px;
 }
+
 #downloadBannerBtn{
   width: auto;
   align-self: center;
@@ -888,4 +895,30 @@ display: none;
 
 #bannerSubtitle{
   top: 60%;
+}
+
+.banner-info-row input[type="range"]{
+  flex:1;
+  min-width: 0;
+}
+
+.banner-info-group{
+  background: var(--bg-card);
+  padding: 12px;
+  border: 1px solid var(--border-soft);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.banner-info-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+}
+.banner-info-row input[type="color"]{
+  width: 40px;
+  height: 30px;
 }

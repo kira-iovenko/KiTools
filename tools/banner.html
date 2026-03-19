@@ -40,18 +40,36 @@
             <div class="tool banner-generator">
                 <div class="banner-info">
                     <h2>Github Banner Generator</h2>
-                    <input type="text" id="bannerTitleInput" placeholder="Title">
-                    <input type="text" id="bannerSubtitleInput" placeholder="Subtitle">
-                    <label>Background Color</label>
-                    <input type="color" id="bannerBgColor" value="#b8e0d2">
-                    <label>Title Color</label>
-                    <input type="color" id="bannerTitleColor" value="#2b3d33">
-                    <label>Subtitle Color</label>
-                    <input type="color" id="bannerSubtitleColor" value="#000000">
-                    <label>Title Size</label>
-                    <input type="range" id="bannerTitleSize" min="20" max="80" value="48">
-                    <label>Subtitle Size</label>
-                    <input type="range" id="bannerSubtitleSize" min="5" max="60" value="20">
+                    <div class="banner-info-controls">
+                        <div class="banner-info-group">
+                            <input type="text" id="bannerTitleInput" placeholder="Title">
+                            <input type="text" id="bannerSubtitleInput" placeholder="Subtitle">
+                        </div>
+                        <div class="banner-info-group">
+                            <div class="banner-info-row">
+                                <label>Background Color</label>
+                                <input type="color" id="bannerBgColor" value="#b8e0d2">
+                            </div>
+                            <div class="banner-info-row">
+                                <label>Title Color</label>
+                                <input type="color" id="bannerTitleColor" value="#2b3d33">
+                            </div>
+                            <div class="banner-info-row">
+                                <label>Subtitle Color</label>
+                                <input type="color" id="bannerSubtitleColor" value="#000000">
+                            </div>
+                        </div>
+                        <div class="banner-info-group">
+                            <div class="banner-info-row">
+                                <label>Title Size</label>
+                                <input type="range" id="bannerTitleSize" min="20" max="80" value="48">
+                            </div>
+                            <div class="banner-info-row">
+                                <label>Subtitle Size</label>
+                                <input type="range" id="bannerSubtitleSize" min="5" max="60" value="20">
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="banner-display" id="banner">
                     <h1 id="bannerTitle">Title</h1>
