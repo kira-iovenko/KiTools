@@ -9,6 +9,7 @@ const bannerSubtitleColor = document.getElementById("bannerSubtitleColor");
 const bannerSubtitleSize = document.getElementById("bannerSubtitleSize");
 const bannerDownloadBtn = document.getElementById("downloadBannerBtn");
 const banner = document.getElementById("banner");
+const resetBannerBtn = document.getElementById("resetBannerBtn");
 
 let offsetX = 0;
 let offsetY = 0;
@@ -81,4 +82,26 @@ document.addEventListener("mousemove", (e) => {
     y2 = Math.max(0, Math.min(y2, limitingY));
     currentlyMoving.style.left = x2+"px";
     currentlyMoving.style.top = y2+"px";
+});
+resetBannerBtn.addEventListener("click", () => {
+    bannerTitleInput.value = "";
+    bannerSubtitleInput.value = "";
+    bannerBgColor.value = "#b8e0d2";
+    bannerTitleColor.value = "2b3d33";
+    bannerTitleSize.value = "47";
+    bannerSubtitleColor.value = "#eee";
+    bannerSubtitleSize.value = "19";
+    bannerTitle.textContent = "Title";
+    bannerSubtitle.textContent = "Subtitle";
+    banner.style.background = "var(--accent-green)";
+    bannerTitle.style.color = "#2b3d33";
+    bannerSubtitle.style.color = "#eee";
+    bannerTitle.style.fontSize = "47px";
+    bannerSubtitle.style.fontSize = "19px";
+    bannerTitle.style.left = "50%";
+    bannerTitle.style.top = "40%";
+    bannerTitle.style.transform = "translate(-50%, -50%)";
+    bannerSubtitle.style.left = "50%";
+    bannerSubtitle.style.top = "60%";
+    bannerSubtitle.style.transform = "translate(-50%, -50%)";
 });
