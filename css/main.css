@@ -744,10 +744,9 @@ display: none;
 }
 
 #qrInput{
-  padding: 11px 20px;
+  padding: 11px;
   font-size:16px;
-  width: 300px;
-  margin-top: 20px;
+  width: 100%;
 }
 
 .qrCode-container{
@@ -761,7 +760,7 @@ display: none;
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
 }
 
 .qrCode-display{
@@ -807,15 +806,30 @@ display: none;
 }
 
 .qrCode-info input[type="color"]{
-  width: 60x;
+  width: 60px;
   height: 35px;
   cursor: pointer;
   border: none;
-  margin-bottom: 10px;
 }
 
 .qrCode-info label{
   color: var(--text-main);
+}
+
+#qrWifiField{
+  opacity: 0;
+  transform: translateY(-10px);
+  pointer-events: none;
+  transition: opacity 0.24s ease, transform 0.24s ease, max-height 0.24s ease;
+  overflow: hidden;
+  max-height: 0;
+}
+
+#qrWifiField.show{
+  opacity:1;
+  transform: translateY(0);
+  pointer-events: auto;
+  max-height: 250px;
 }
 
 .banner-generator{
@@ -907,12 +921,12 @@ display: none;
   top: 60%;
 }
 
-.banner-info-row input[type="range"]{
+.tool-info-row input[type="range"]{
   flex:1;
   min-width: 0;
 }
 
-.banner-info-group{
+.tool-info-group{
   background: var(--bg-card);
   padding: 12px;
   border: 1px solid var(--border-soft);
@@ -922,13 +936,13 @@ display: none;
   gap: 8px;
 }
 
-.banner-info-row {
+.tool-info-row {
   display: flex;
   gap: 10px;
   align-items: center;
   justify-content: space-between;
 }
-.banner-info-row input[type="color"]{
+.tool-info-row input[type="color"]{
   width: 40px;
   height: 30px;
 }

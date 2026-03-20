@@ -66,11 +66,11 @@ wifiPassword.addEventListener("input", generateQr);
 wifiEncryption.addEventListener("change", generateQr);
 qrType.addEventListener("change", () =>{
     if(qrType.value === "wifi"){
-        wifiFields.style.display = "block";
+        wifiFields.classList.add("show");
         qrInput.style.display = "none";
         qrInput.value = "";
     } else{
-        wifiFields.style.display = "none";
+        wifiFields.classList.remove("show");
         qrInput.style.display = "block";
         wifiSSID.value = "";
         wifiPassword.value = "";
@@ -78,6 +78,14 @@ qrType.addEventListener("change", () =>{
     }
     generateQr();
 });
+
+if(qrType.value === "wifi"){
+    wifiFields.classList.add("show");
+    qrInput.style.display = "none";
+} else{
+    wifiFields.classList.remove("show");
+    qrInput.style.display = "block";
+}
 
 downloadQrBtn.addEventListener("click", () => {
     const img = qrDiv.querySelector("img");
