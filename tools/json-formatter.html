@@ -1,8 +1,7 @@
 <!DOCTYPE html>
-<html>
 <head>
     <meta charset="UTF-8">
-    <title>Extract HTML - KITools</title>
+    <title>JSON Formatter & Validator - KITools</title>
     <link rel="stylesheet" href="../css/main.css">
 </head>
 <body>
@@ -16,8 +15,8 @@
                 <p class="category">Text</p>
                 <ul>
                     <li><a href="whitespace.html">Whitespace Remover</a></li>
-                    <span class="active">HTML Preview</span>
-                    <li><a href="json-formatter.html">JSON Formatter</a></li>
+                    <li><a href="preview-html.html">HTML Preview</a></li>
+                    <span class="active">JSON Formatter</span>
                 </ul>
                 <p class="category">Times</p>
                 <ul>
@@ -38,16 +37,19 @@
             <button id="darkMode">Dark Mode</button>
         </aside>
         <main class="main-view">
-            <div class="tool split-preview">
-                <h2>HTML Preview</h2>
-                <div class="editor-preview">
-                    <textarea id="inputHtml" placeholder="Paste/type HTML here..."></textarea>
-                    <iframe id="previewFrame"></iframe>
+            <div class="tool">
+                <h2>JSON Formatter & Validator</h2>
+                <textarea id="inputJson" placeholder="Paste/type JSON here..."></textarea>
+                <br></br>
+                <div class="buttons">
+                    <button id="formatJsonBtn">Format JSON</button>
+                    <button id="validateJsonBtn">Validate JSON</button>
                 </div>
-                <button id="previewTextBtn">Preview Text</button>
+                <h3 id="jsonStatus"></h3>
+                <pre id="outputJson"></pre>
             </div>
         </main>
     </div>
-    <script src="../js/preview-html.js"></script>
+    <script src="../js/json-formatter.js"></script>
     <script src="../js/script.js"></script>
-</body> 
+</body>

@@ -947,3 +947,20 @@ display: none;
   height: 30px;
 }
 
+#outputJson{
+  background: var(--bg-card);
+  color: var(--text-main);
+  padding: 16px;
+  margin-top: 20px;
+  border-radius: 11px;
+  border: 1px solid var(--border-soft);
+  white-space: pre-wrap;
+  font-family: monospace;
+  max-height: 300px;
+  overflow: auto;
+}
+#jsonStatus{
+  margin-top: 10px;
+  font-weight: 600;
+}
+
