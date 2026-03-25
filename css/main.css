@@ -74,7 +74,7 @@ p{
   margin-top: 1.2rem;
   margin-bottom: 0.5rem;
   font-weight: 600;
-  font-size: 0.8rem;
+  font-size: 1rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: #94a3b8;
@@ -88,6 +88,7 @@ p{
 
 .sidebar li {
   margin-bottom: 0.5rem;
+  margin-top: 1rem;
 }
 
 .sidebar a {
@@ -105,6 +106,7 @@ p{
 .sidebar a:hover {
   background-color: var(--accent-green);
   color: #3d5a5a;
+
 }
 
 .sidebar span.active {
@@ -112,6 +114,8 @@ p{
   color: white;
   border-radius: 8px;
   display: block;
+  margin-bottom: 0.5rem;
+  margin-top: 1rem;
 }
 
 #darkMode {
