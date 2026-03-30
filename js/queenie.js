@@ -1,5 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     createQueenie();
+    toggleQueenieVisibility();
+    setupToggleButton();
     queenieInitialize();
 });
 const isInTools = window.location.pathname.includes("tools");
@@ -16,6 +18,20 @@ let typing = false;
 let queenie;
 let guideText;
 let textbox;
+let allowNextDialogue = false;
+let queenieCont;
+
+// document.getElementById("toggleQueenie").addEventListener("click", () => {
+//     const hidden = queenieCont.style.display === "none";
+//     if(hidden){
+//         queenieCont.style.display = "block";
+//         localStorage.setItem("hideQueenie", "false");
+//     } else{
+//         queenieCont.style.display = "none";
+//         localStorage.setItem("hideQueenie", "true");
+//     }
+
+// });
 
 function talk() {
     talkingInterval = setInterval(() => {
@@ -36,8 +52,32 @@ function createQueenie(){
     queenie = document.getElementById("queenie_sprite");
     guideText = document.getElementById("guideText");
     textbox = document.querySelector(".textbox");
+    queenieCont = document.querySelector(".queenie");
 }
-
+function toggleQueenieVisibility(){
+    const hidden = localStorage.getItem("hideQueenie") === "true";
+    if(hidden){
+        queenieCont.classList.add("hidden");
+    } else{
+        queenieCont.classList.remove("hidden");
+    }
+}
+function setupToggleButton(){
+    const toggleBtn = document.getElementById("toggleQueenie");
+    if(!toggleBtn){
+        return;
+    }
+    toggleBtn.addEventListener("click", () => {
+        const hidden = queenieCont.classList.contains("hidden");
+        if(hidden){
+            queenieCont.classList.remove("hidden");
+            localStorage.setItem("hideQueenie", "false");
+        } else{
+            queenieCont.classList.add("hidden");
+            localStorage.setItem("hideQueenie", "true");
+        }
+    });
+}
 function queenieInitialize(){
     dialogueSetup();
     clickSetup();
@@ -55,6 +95,7 @@ function textAppear(text, callback) {
     guideText.textContent = "";
     typing = true;
     talk();
+    textbox.classList.remove("hidden");
     typingInterval = setInterval(() => {
         guideText.textContent += text[i];
         i++;
@@ -62,6 +103,9 @@ function textAppear(text, callback) {
             clearInterval(typingInterval);
             stopTalking();
             typing = false;
+            setTimeout(() =>{
+                textbox.classList.add("hidden");
+            }, 4000);
             if(callback) callback();
         }
     }, 40); 
@@ -75,6 +119,22 @@ function nextDialogue(){
             textbox.classList.add("no-arrow");
         }
     }
+}
+function oneDialogueOnly(){
+    if (dialogues.length === 0){
+        return;
+    }
+    const keyForPage = "dialogueMemory_" +window.location.pathname;
+    let oldIndexes = JSON.parse(localStorage.getItem(keyForPage)) || [];
+    if(oldIndexes.length >= dialogues.length){
+        oldIndexes = [];
+    }
+    const remainingIndexes = dialogues.map((_, index)=>index).filter(index => !oldIndexes.includes(index));
+    const newRandomIndex = remainingIndexes[Math.floor(Math.random() * remainingIndexes.length)];
+    oldIndexes.push(newRandomIndex);
+    localStorage.setItem(keyForPage, JSON.stringify(oldIndexes));
+    textAppear(dialogues[newRandomIndex]);
+    textbox.classList.add("no-arrow");
 }
 
 function blinkRandomly(){
@@ -96,6 +156,7 @@ function blinkRandomly(){
 }
 function dialogueSetup(){
     const currentPath = window.location.pathname;
+    currentDialogue = 0;
     if(currentPath.includes("whitespace")){
         dialogues = ["Clean up time? Yes! Make the text ~bonito~", "Those sneaky double spaces... make text not neat!", "Can you  spot a double space?"];
     }
@@ -127,14 +188,23 @@ function dialogueSetup(){
         if(!localStorage.getItem("visitedBefore")){
             dialogues = ["Hi! Welcome to KITools.", "Pick something from the tools in the sidebar!"];
             localStorage.setItem("visitedBefore", "true");
+            allowNextDialogue = true;
         } else{
             dialogues = ["Welcome back! :D", "What shall we do today?"];
+            allowNextDialogue = false;
         }
     }
-    nextDialogue();
+    if(allowNextDialogue){
+        nextDialogue();
+    } else{
+        oneDialogueOnly();
+    }
 } 
 function clickSetup(){
     textbox.addEventListener("click", () =>{
+        if(!allowNextDialogue){
+            return;
+        }
         if(typing){
             clearInterval(typingInterval);
             guideText.textContent = dialogues[Math.max(0,currentDialogue -1)];

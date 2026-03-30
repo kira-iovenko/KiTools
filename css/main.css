@@ -692,6 +692,13 @@ display: none;
 .textbox.no-arrow::after{
   display:none;
 }
+
+.textbox.hidden{
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+}
+
 @keyframes arrowBounce {
   0%, 100%{transform: translateY(0);}
   50%{transform: translateY(3px);}
