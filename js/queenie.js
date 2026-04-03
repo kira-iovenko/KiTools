@@ -21,18 +21,6 @@ let textbox;
 let allowNextDialogue = false;
 let queenieCont;
 
-// document.getElementById("toggleQueenie").addEventListener("click", () => {
-//     const hidden = queenieCont.style.display === "none";
-//     if(hidden){
-//         queenieCont.style.display = "block";
-//         localStorage.setItem("hideQueenie", "false");
-//     } else{
-//         queenieCont.style.display = "none";
-//         localStorage.setItem("hideQueenie", "true");
-//     }
-
-// });
-
 function talk() {
     talkingInterval = setInterval(() => {
         queenie.src = queenie.src.includes("neutral")?talking: neutral;
@@ -41,7 +29,7 @@ function talk() {
 
 function createQueenie(){
     const queenieHtml = `
-        <div class="queenie">
+        <div class="queenie hidden-queenie">
             <div class="textbox">
                 <p id="guideText"></p>
             </div>
@@ -57,25 +45,56 @@ function createQueenie(){
 function toggleQueenieVisibility(){
     const hidden = localStorage.getItem("hideQueenie") === "true";
     if(hidden){
-        queenieCont.classList.add("hidden");
+        queenieCont.classList.add("hidden-queenie");
     } else{
-        queenieCont.classList.remove("hidden");
+        setTimeout(()=>{
+            queenieCont.classList.remove("hidden-queenie");
+            queenieCont.classList.add("bounce-in");
+            setTimeout(()=>{
+                queenieCont.classList.remove("bounce-in");
+            }, 600);
+        }, 50);
+    }
+    updateHideButtonText();
+}
+
+function updateHideButtonText(){
+    const toggleBtn = document.getElementById("toggleQueenie");
+    if(!toggleBtn){
+        return;
+    }
+    if(!queenieCont){
+        return;
+    }
+    const hidden = localStorage.getItem("hideQueenie") === "true";
+    if(hidden){
+        toggleBtn.textContent = "Show Queenie";
+    } else{
+        toggleBtn.textContent = "Hide Queenie";
     }
 }
+
 function setupToggleButton(){
     const toggleBtn = document.getElementById("toggleQueenie");
     if(!toggleBtn){
         return;
     }
+
     toggleBtn.addEventListener("click", () => {
-        const hidden = queenieCont.classList.contains("hidden");
+        const hidden = queenieCont.classList.contains("hidden-queenie");
         if(hidden){
-            queenieCont.classList.remove("hidden");
+            queenieCont.classList.remove("hidden-queenie");
+            queenieCont.classList.add("bounce-in");
+            setTimeout(()=>{
+                queenieCont.classList.remove("bounce-in");
+            }, 600);
             localStorage.setItem("hideQueenie", "false");
+
         } else{
-            queenieCont.classList.add("hidden");
+            queenieCont.classList.add("hidden-queenie");
             localStorage.setItem("hideQueenie", "true");
         }
+        updateHideButtonText();
     });
 }
 function queenieInitialize(){
