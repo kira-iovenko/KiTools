@@ -6,29 +6,67 @@
     <link rel="stylesheet" href="../css/main.css">
 </head>
 <body>
-    <main class="main-view">
-        <div class="tool todo-list"> 
-            <h2>Todo List</h2>
-            <div>
-                <input type="text" id="taskInput" placeholder="Task...">
-                <input type="date" id="taskDateInput">
-                <input type="time" id="taskTimeInput">
-                <button>Add</button>
+    <div class="container">
+        <aside class="sidebar">
+            <h1>KITools</h1>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                </ul>
+                <p class="category">Text</p>
+                <ul>
+                    <li><a href="whitespace.html">Whitespace Remover</a></li>
+                    <li><a href="preview-html.html">HTML Preview</a></li>
+                    <li><a href="json-formatter.html">JSON Formatter</a></li>
+                </ul>
+                <p class="category">Times</p>
+                <ul>
+                    <li><a href="timer.html">Timer</a></li>
+                    <li><a href="pomodoro.html">Pomodoro</a></li>
+                </ul>
+                <p class="category">Utility</p>
+                <ul>
+                    <li><a href="coin.html">Coin Flip</a></li>
+                    <li><a href="flashcards.html">Flashcards</a></li>
+                    <span class="active">Todo List</span>
+                </ul>
+                <p class="category">Design</p>
+                <ul>
+                    <li><a href="qrCode.html">QR Code Generator</a></li>
+                    <li><a href="banner.html">Banner Generator</a></li>
+                </ul>
+            </nav>
+            <div class="settings-btns">
+                <button id="darkMode">Dark Mode</button>
+                <button id="toggleQueenie">Hide Queenie</button>
             </div>
-            <table id="todo-list-table">
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th>Task</th>
-                        <th>Due Date</th>
-                        <th>Time</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody></tbody>
-            </table>
-        </div>
-    </main>
+        </aside>
+        <main class="main-view">
+            <div class="tool todo-list"> 
+                <h2>Todo List</h2>
+                <div>
+                    <input type="text" id="taskInput" placeholder="Task...">
+                    <input type="date" id="taskDateInput">
+                    <input type="time" id="taskTimeInput">
+                    <button>Add</button>
+                </div>
+                <table id="todo-list-table">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Task</th>
+                            <th>Due Date</th>
+                            <th>Time</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </main>
+    </div>
     <script src="../js/todo-list.js"></script>
+    <script src="../js/script.js"></script>
+    <script src="../js/queenie.js"></script>
 </body>
 </html>

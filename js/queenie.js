@@ -197,6 +197,9 @@ function dialogueSetup(){
     else if(currentPath.includes("flashcards")){
         dialogues = ["Study time! I can make you some company :)", "You better not skip out on these..."];
     }
+    else if(currentPath.includes("todo-list")){
+        dialogues = ["Don't just write down your tasks... DO them! >:D", "Think, think... you definitely have stuff to do.", "We can take this one task at a time :)", "Start easy. Momentum is everything, y'know?", "If it's not written down, does it even exist?"];
+    }
     else if(currentPath.includes("qrCode")){
         dialogues = ["QR codes? I know you can make it look cool!", "Let's make some fancy QR codes~"];
     }
