@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Todo List</title>
+    <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+    <main class="main-view">
+        <div class="tool todo-list"> 
+            <h2>Todo List</h2>
+            <div>
+                <input type="text" id="taskInput" placeholder="Task...">
+                <input type="date" id="taskDateInput">
+                <input type="time" id="taskTimeInput">
+                <button>Add</button>
+            </div>
+            <table id="todo-list-table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Task</th>
+                        <th>Due Date</th>
+                        <th>Time</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </main>
+    <script src="../js/todo-list.js"></script>
+</body>
+</html>

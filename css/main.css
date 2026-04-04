@@ -160,7 +160,7 @@ button {
   color: white;
   font-size: 0.95rem;
   transition: all 0.25s ease;
-  box-shadow: 0 4px 10px rgba(246, 166, 178, 0.4);
+  box-shadow: 0 4px 10px rgba(246, 177, 188, 0.4);
 }
 
 button:hover {
@@ -1012,3 +1012,58 @@ display: none;
   font-weight: 600;
 }
 
+.todo-list{
+  padding: 20px;
+  border-radius: 16px;
+  background: var(--bg-card);
+  width: 100%;
+  max-width: 600px;
+  box-shadow: 0 8px 26px rgba(15, 14, 14, 0.08);
+  margin: 30px auto;
+}
+
+.todo-list table{
+  width: 100%;
+  border-collapse: separate;
+  margin-top: 20px;
+  border-spacing: 0px 10px;
+}
+
+.todo-list th{
+  padding: 11px;
+  text-align: left;
+  background: var(--accent-green);
+  font-weight: 700;
+}
+.todo-list td{
+  padding: 12px;
+  text-align: left;
+}
+.completed{
+  opacity: 0.7;
+  text-decoration: line-through;
+}
+.todo-list input{
+  border-radius: 8px;
+  padding: 9px 11px;
+  border: 1px solid var(--border-soft);
+  outline: none;
+}
+.todo-list button{
+  border: none;
+  background: var(--accent-green);
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.todo-list .task-delete-btn{
+  background: var(--accent-pink);
+}
+
+.task-delete-btn:hover{
+  background: #ff8a8a;
+}
+.todo-list input:focus{
+  border-color: var(--accent-green);
+  box-shadow: 0 0 0 0.8px rgba(0, 199, 149, 0.2);
+}
