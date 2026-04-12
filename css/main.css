@@ -950,6 +950,7 @@ display: none;
 
 #banner {
   position: relative;
+  overflow: hidden;
 }
 
 #bannerTitle,
@@ -960,6 +961,7 @@ display: none;
   transition: none;
   left: 50%;
   transform: translateX(-50%);
+  z-index: 2;
 }
 #bannerTitle{
   top: 35%;
@@ -1114,4 +1116,17 @@ body.dark-mode .todo-list tr td{
 }
 body.dark-mode .completed{
   opacity: 0.5;
+}
+
+#bannerImage{
+  will-change: transform;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  width: auto;
+  height: auto;
+  max-width:none;
+  max-height:none;
+  z-index:1;
 }

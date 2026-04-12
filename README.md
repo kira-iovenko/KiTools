@@ -26,10 +26,10 @@ A built-in interactive companion!
 ## Dark Mode
 KITools supports dark mode!
 
--Toggle for switching between light/dark themes
+- Toggle for switching between light/dark themes
 
 ## Made using:
 
--HTML
--CSS
--JavaScript
+- HTML
+- CSS
+- JavaScript

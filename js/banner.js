@@ -10,6 +10,13 @@ const bannerSubtitleSize = document.getElementById("bannerSubtitleSize");
 const bannerDownloadBtn = document.getElementById("downloadBannerBtn");
 const banner = document.getElementById("banner");
 const resetBannerBtn = document.getElementById("resetBannerBtn");
+const bannerImageUpload = document.getElementById("bannerImageUpload");
+const removeBgImageBtn = document.getElementById("removeBgImageBtn");
+const bannerImage = document.getElementById("bannerImage");
+const bannerImageX = document.getElementById("bannerImageX");
+const bannerImageY = document.getElementById("bannerImageY");
+const bannerImageZoom = document.getElementById("bannerImageZoom");
+const bannerImageControls = document.getElementById("bannerImageControls");
 
 let offsetX = 0;
 let offsetY = 0;
@@ -21,6 +28,34 @@ bannerTitleInput.addEventListener("input", ()=> {
 bannerSubtitleInput.addEventListener("input", ()=> {
     bannerSubtitle.textContent = bannerSubtitleInput.value || "Subtitle";
 });
+bannerImageUpload.addEventListener("change", () => {
+    const imageFile = bannerImageUpload.files[0];
+    if(!imageFile){
+        return;
+    }
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        bannerImage.src=e.target.result;
+        bannerImage.style.display = "block";
+        bannerImageControls.classList.remove("hidden");
+        bannerImageX.value = 0;
+        bannerImageY.value = 0;
+        bannerImageZoom.value =1;
+        changeImagePosition();
+    };
+    reader.readAsDataURL(imageFile);
+});
+
+function changeImagePosition(){
+    const x = bannerImageX.value;
+    const y = bannerImageY.value;
+    const zoom = Number(bannerImageZoom.value);
+    bannerImage.style.transform = `translate(-50%, -50%) translate(${x}px, ${y}px) scale(${zoom})`;
+}
+bannerImageX.addEventListener("input", changeImagePosition);
+bannerImageY.addEventListener("input", changeImagePosition);
+bannerImageZoom.addEventListener("input", changeImagePosition);
+
 bannerBgColor.addEventListener("input", () => {
     banner.style.background = bannerBgColor.value;
 });
@@ -87,7 +122,7 @@ resetBannerBtn.addEventListener("click", () => {
     bannerTitleInput.value = "";
     bannerSubtitleInput.value = "";
     bannerBgColor.value = "#b8e0d2";
-    bannerTitleColor.value = "2b3d33";
+    bannerTitleColor.value = "#2b3d33";
     bannerTitleSize.value = "47";
     bannerSubtitleColor.value = "#eee";
     bannerSubtitleSize.value = "19";
@@ -104,4 +139,19 @@ resetBannerBtn.addEventListener("click", () => {
     bannerSubtitle.style.left = "50%";
     bannerSubtitle.style.top = "60%";
     bannerSubtitle.style.transform = "translate(-50%, -50%)";
+    bannerImage.src="";
+    bannerImage.style.display = "none";
+    bannerImageControls.classList.add("hidden");
+    bannerImageUpload.value = "";
+    bannerImageX.value = 0;
+    bannerImageY.value = 0;
+    bannerImageZoom.value = 1;
+    changeImagePosition();
+});
+
+removeBgImageBtn.addEventListener("click", () => {
+    bannerImage.src="";
+    bannerImage.style.display = "none";
+    bannerImageControls.classList.add("hidden");
+    bannerImageUpload.value = "";
 });

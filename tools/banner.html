@@ -52,6 +52,10 @@
                         </div>
                         <div class="tool-info-group">
                             <div class="tool-info-row">
+                                <label>Background Image</label>
+                                <input type="file" id="bannerImageUpload" accept="image/*">
+                            </div>
+                            <div class="tool-info-row">
                                 <label>Background Color</label>
                                 <input type="color" id="bannerBgColor" value="#b8e0d2">
                             </div>
@@ -74,16 +78,32 @@
                                 <input type="range" id="bannerSubtitleSize" min="5" max="60" value="20">
                             </div>
                         </div>
+                        <div class="tool-info-group hidden" id="bannerImageControls">
+                            <div class="tool-info-row">
+                                <label>Image X-axis</label>
+                                <input type="range" id="bannerImageX" min="-200" max="200" value="0">
+                            </div>
+                            <div class="tool-info-row">
+                                <label>Image Y-axis</label>
+                                <input type="range" id="bannerImageY" min="-200" max="200" value="0">
+                            </div>
+                            <div class="tool-info-row">
+                                <label>Image Zoom</label>
+                                <input type="range" id="bannerImageZoom" min="0.5" max="3" step="0.1" value="1">
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="banner-and-bannerBtns">
                     <div class="banner-display" id="banner">
+                        <img id="bannerImage" style="display:none;">
                         <h1 id="bannerTitle">Title</h1>
                         <p id="bannerSubtitle">Subtitle</p>
                     </div>
                     <div class="banner-buttons">
                         <button id="downloadBannerBtn">Download Banner</button>
                         <button id="resetBannerBtn">Reset Banner</button>
+                        <button id="removeBgImageBtn">Remove Image</button>
                     </div>
                 </div>
             </div>
