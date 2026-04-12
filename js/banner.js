@@ -38,6 +38,7 @@ bannerImageUpload.addEventListener("change", () => {
         bannerImage.src=e.target.result;
         bannerImage.style.display = "block";
         bannerImageControls.classList.remove("hidden");
+        removeBgImageBtn.classList.remove("hidden");
         bannerImageX.value = 0;
         bannerImageY.value = 0;
         bannerImageZoom.value =1;
@@ -142,6 +143,7 @@ resetBannerBtn.addEventListener("click", () => {
     bannerImage.src="";
     bannerImage.style.display = "none";
     bannerImageControls.classList.add("hidden");
+    removeBgImageBtn.classList.add("hidden");
     bannerImageUpload.value = "";
     bannerImageX.value = 0;
     bannerImageY.value = 0;
@@ -153,5 +155,6 @@ removeBgImageBtn.addEventListener("click", () => {
     bannerImage.src="";
     bannerImage.style.display = "none";
     bannerImageControls.classList.add("hidden");
+    removeBgImageBtn.classList.add("hidden");
     bannerImageUpload.value = "";
 });
